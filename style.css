@@ -4,143 +4,305 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
   color: #333;
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
-/* ナビゲーション */
-header {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: sticky;
+/* ===== ナビゲーション ===== */
+#header {
+  position: fixed;
   top: 0;
-  z-index: 100;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  z-index: 1000;
 }
 
 nav {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 18px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #2563eb;
+  letter-spacing: 0.1em;
+  color: #1a1a2e;
 }
 
-nav ul {
+.nav-links {
   list-style: none;
   display: flex;
-  gap: 32px;
+  gap: 28px;
 }
 
-nav a {
+.nav-links a {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  color: #444;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
 }
 
-nav a:hover {
+.nav-links a:hover {
   color: #2563eb;
 }
 
-/* ヒーロー */
+/* ===== ヒーロー ===== */
 .hero {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+              url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1600') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 80px;
+}
+
+.hero-content {
   color: #fff;
-  text-align: center;
-  padding: 120px 24px;
 }
 
-.hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 16px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 40px;
-  opacity: 0.9;
-}
-
-/* ボタン */
-.btn {
-  display: inline-block;
-  background: #fff;
-  color: #2563eb;
-  padding: 14px 36px;
-  border-radius: 50px;
-  text-decoration: none;
+.hero-content h1 {
+  font-size: 4rem;
   font-weight: bold;
-  transition: transform 0.2s;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
+.hero-content p {
+  font-size: 1.15rem;
+  line-height: 2;
+  margin-bottom: 40px;
+  opacity: 0.92;
 }
 
-/* セクション共通 */
+.btn-hero {
+  display: inline-block;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 14px 40px;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.btn-hero:hover {
+  background: #fff;
+  color: #333;
+}
+
+/* ===== セクション共通 ===== */
 .section {
-  padding: 80px 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 24px;
-  color: #2563eb;
+  padding: 100px 24px;
 }
 
 .gray {
-  background: #f8fafc;
-  max-width: 100%;
-  padding: 80px 24px;
+  background: #f7f9fc;
 }
 
-.gray .works-grid {
+.container {
   max-width: 1000px;
   margin: 0 auto;
 }
 
-/* 実績カード */
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
+.text-center {
+  text-align: center;
 }
 
-.work-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding-bottom: 16px;
+.section-title {
+  font-size: 2rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #1a1a2e;
+  position: relative;
 }
 
-.work-img {
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #2563eb;
+  margin: 16px auto 0;
+}
+
+/* ===== 自己紹介 ===== */
+.about-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.about-photo {
+  flex-shrink: 0;
+}
+
+.photo-circle {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
   background: #e2e8f0;
-  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #94a3b8;
-  font-size: 1rem;
-  margin-bottom: 12px;
+  font-size: 0.9rem;
 }
 
-/* フッター */
-footer {
-  background: #1e293b;
-  color: #94a3b8;
+.about-text p {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* ===== サービス ===== */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.service-card {
+  background: #fff;
+  padding: 40px 28px;
   text-align: center;
-  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.service-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #1a1a2e;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ===== 制作実績 ===== */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.work-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.work-img {
+  height: 200px;
+  background: #dde3ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.work-info {
+  padding: 20px;
+}
+
+.work-info h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #1a1a2e;
+}
+
+.work-info p {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ===== 制作の流れ ===== */
+.flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.flow-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.flow-num {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2563eb;
+  opacity: 0.3;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.flow-text h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #1a1a2e;
+}
+
+.flow-text p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* ===== お問い合わせ ===== */
+.contact-lead {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.btn-contact {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  padding: 16px 56px;
+  text-decoration: none;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.btn-contact:hover {
+  background: #1d4ed8;
+}
+
+/* ===== フッター ===== */
+footer {
+  background: #1a1a2e;
+  color: #888;
+  text-align: center;
+  padding: 28px;
+  font-size: 0.85rem;
 }

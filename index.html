@@ -8,52 +8,151 @@
 </head>
 <body>
 
-  <header>
+  <!-- ナビゲーション -->
+  <header id="header">
     <nav>
       <div class="logo">Kenichi</div>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <ul class="nav-links">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">自己紹介</a></li>
+        <li><a href="#service">サービス</a></li>
+        <li><a href="#works">制作実績</a></li>
+        <li><a href="#flow">制作の流れ</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>WEB制作 フリーランス</h1>
-    <p>お客様のビジネスをWebで加速します</p>
-    <a href="#contact" class="btn">お問い合わせ</a>
+  <!-- ヒーロー -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>KENICHI</h1>
+      <p>リーズナブルで高品質なホームページ制作<br>あなたのビジネスの前進をサポート致します</p>
+      <a href="#contact" class="btn-hero">お問い合わせ</a>
+    </div>
   </section>
 
+  <!-- 自己紹介 -->
   <section id="about" class="section">
-    <h2>About</h2>
-    <p>はじめまして、Kenichiです。<br>
-    副業でWEB制作を行っています。<br>
-    ホームページ制作・ランディングページ制作を得意としています。</p>
-  </section>
-
-  <section id="works" class="section gray">
-    <h2>Works</h2>
-    <div class="works-grid">
-      <div class="work-card">
-        <div class="work-img">制作実績①</div>
-        <p>コーポレートサイト</p>
-      </div>
-      <div class="work-card">
-        <div class="work-img">制作実績②</div>
-        <p>ランディングページ</p>
-      </div>
-      <div class="work-card">
-        <div class="work-img">制作実績③</div>
-        <p>ECサイト</p>
+    <div class="container">
+      <h2 class="section-title">ABOUT</h2>
+      <div class="about-inner">
+        <div class="about-photo">
+          <div class="photo-circle">PHOTO</div>
+        </div>
+        <div class="about-text">
+          <p>
+            医療機関で臨床工学技士として勤務しながら、WordPressを用いたweb制作を中心に活動しているフリーランスwebデザイナーです。
+          </p>
+          <p>
+            ただサイトを作るだけではなく、お客様の課題に共に向き合い、根本的な問題解決を目指します。
+          </p>
+          <p>
+            医療現場で培ったホスピタリティーのある対応と、丁寧なコミュニケーションを大切にしています。
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- サービス -->
+  <section id="service" class="section gray">
+    <div class="container">
+      <h2 class="section-title">SERVICE</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <h3>ホームページ制作</h3>
+          <p>企業・店舗・個人のホームページをWordPressで制作します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📄</div>
+          <h3>ランディングページ</h3>
+          <p>集客・販売に特化したランディングページを制作します。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>保守・運用サポート</h3>
+          <p>制作後の更新作業・トラブル対応をサポートします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 制作実績 -->
+  <section id="works" class="section">
+    <div class="container">
+      <h2 class="section-title">WORKS</h2>
+      <div class="works-grid">
+        <div class="work-card">
+          <div class="work-img">制作実績①</div>
+          <div class="work-info">
+            <h3>コーポレートサイト</h3>
+            <p>WordPress / レスポンシブ対応</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-img">制作実績②</div>
+          <div class="work-info">
+            <h3>ランディングページ</h3>
+            <p>HTML・CSS / 高速表示</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-img">制作実績③</div>
+          <div class="work-info">
+            <h3>店舗ホームページ</h3>
+            <p>WordPress / SEO対策済み</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 制作の流れ -->
+  <section id="flow" class="section gray">
+    <div class="container">
+      <h2 class="section-title">FLOW</h2>
+      <div class="flow-list">
+        <div class="flow-item">
+          <div class="flow-num">01</div>
+          <div class="flow-text">
+            <h3>お問い合わせ</h3>
+            <p>まずはお気軽にご連絡ください。ヒアリングシートをお送りします。</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">02</div>
+          <div class="flow-text">
+            <h3>ヒアリング・お見積り</h3>
+            <p>ご要望をお聞きし、お見積りをご提示します。</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">03</div>
+          <div class="flow-text">
+            <h3>デザイン・制作</h3>
+            <p>ご確認いただきながら制作を進めます。</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">04</div>
+          <div class="flow-text">
+            <h3>納品・公開</h3>
+            <p>最終確認後、公開・納品いたします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ -->
   <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>お仕事のご依頼・ご相談はこちらからどうぞ</p>
-    <a href="mailto:kendoyasa@gmail.com" class="btn">メールで問い合わせる</a>
+    <div class="container text-center">
+      <h2 class="section-title">CONTACT</h2>
+      <p class="contact-lead">お仕事のご依頼・ご相談はお気軽にどうぞ</p>
+      <a href="mailto:kendoyasa@gmail.com" class="btn-contact">お問い合わせはこちら</a>
+    </div>
   </section>
 
   <footer>
