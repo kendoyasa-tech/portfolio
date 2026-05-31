@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プロフィール画像 PNG書き出し</title>
+  <style>
+    body {
+      font-family: 'Hiragino Sans', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 24px;
+    }
+    h1 { font-size: 1.2rem; color: #1a1a2e; }
+    canvas {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    button {
+      padding: 14px 48px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #1d4ed8; }
+    p { font-size: 0.85rem; color: #888; }
+  </style>
+</head>
+<body>
+  <h1>インスタ プロフィール画像 (1080×1080 PNG)</h1>
+  <canvas id="canvas" width="1080" height="1080"></canvas>
+  <button id="dlBtn">PNG をダウンロード</button>
+  <p>ダウンロードしたPNGをInstagramのプロフィール写真に設定してください</p>
+
+  <script>
+    const svgUrl = 'instagram-profile-static.svg';
+
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, 1080, 1080);
+    };
+
+    fetch(svgUrl)
+      .then(r => r.text())
+      .then(svgText => {
+        const blob = new Blob([svgText], { type: 'image/svg+xml' });
+        img.src = URL.createObjectURL(blob);
+      });
+
+    document.getElementById('dlBtn').onclick = () => {
+      const canvas = document.getElementById('canvas');
+      const a = document.createElement('a');
+      a.download = 'instagram-profile.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    };
+  </script>
+</body>
+</html>

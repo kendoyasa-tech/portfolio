@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <!-- グリッドアイコン（2×2） -->
+  <rect x="370" y="340" width="148" height="148" rx="20" fill="url(#accent)"/>
+  <rect x="562" y="340" width="148" height="148" rx="20" fill="white" fill-opacity="0.15"/>
+  <rect x="370" y="532" width="148" height="148" rx="20" fill="white" fill-opacity="0.15"/>
+  <rect x="562" y="532" width="148" height="148" rx="20" fill="url(#accent)" fill-opacity="0.6"/>
+
+  <!-- テキスト -->
+  <text
+    x="540" y="760"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="72"
+    font-weight="700"
+    fill="white"
+    text-anchor="middle"
+    letter-spacing="14"
+  >WORKS</text>
+
+  <!-- アクセントライン -->
+  <rect x="460" y="778" width="160" height="4" rx="2" fill="#2563eb"/>
+</svg>

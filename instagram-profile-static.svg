@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a3d8f"/>
+      <stop offset="55%" stop-color="#1e78e0"/>
+      <stop offset="100%" stop-color="#5fb3f5"/>
+    </linearGradient>
+    <linearGradient id="ivyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#558b2f"/>
+      <stop offset="100%" stop-color="#33691e"/>
+    </linearGradient>
+    <linearGradient id="infieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a1887f"/>
+      <stop offset="100%" stop-color="#795548"/>
+    </linearGradient>
+    <filter id="textShadow">
+      <feDropShadow dx="0" dy="5" stdDeviation="14" flood-color="rgba(0,0,0,0.65)"/>
+    </filter>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="rgba(255,238,88,0.8)"/>
+    </filter>
+    <clipPath id="circle">
+      <circle cx="540" cy="540" r="540"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circle)">
+    <rect width="1080" height="1080" fill="url(#sky)"/>
+
+    <!-- 雲（左） -->
+    <ellipse cx="185" cy="195" rx="118" ry="64" fill="white" fill-opacity="0.93"/>
+    <ellipse cx="278" cy="165" rx="88"  ry="56" fill="white" fill-opacity="0.93"/>
+    <ellipse cx="118" cy="228" rx="74"  ry="46" fill="white" fill-opacity="0.88"/>
+
+    <!-- 雲（右） -->
+    <ellipse cx="875" cy="165" rx="128" ry="68" fill="white" fill-opacity="0.90"/>
+    <ellipse cx="968" cy="138" rx="90"  ry="54" fill="white" fill-opacity="0.87"/>
+    <ellipse cx="808" cy="196" rx="76"  ry="46" fill="white" fill-opacity="0.85"/>
+
+    <!-- 雲（上中央） -->
+    <ellipse cx="510" cy="118" rx="72" ry="38" fill="white" fill-opacity="0.72"/>
+    <ellipse cx="575" cy="98"  rx="54" ry="30" fill="white" fill-opacity="0.68"/>
+
+    <!-- 照明塔（左外） -->
+    <rect x="102" y="390" width="16" height="370" fill="#37474f"/>
+    <rect x="72"  y="374" width="76" height="26"  rx="5" fill="#546e7a"/>
+    <rect x="76"  y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="94"  y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="112" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="130" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+
+    <!-- 照明塔（左内） -->
+    <rect x="318" y="430" width="13" height="330" fill="#37474f"/>
+    <rect x="292" y="415" width="65" height="22"  rx="4" fill="#546e7a"/>
+    <rect x="296" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="312" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="328" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+
+    <!-- 照明塔（右内） -->
+    <rect x="749" y="430" width="13" height="330" fill="#37474f"/>
+    <rect x="723" y="415" width="65" height="22"  rx="4" fill="#546e7a"/>
+    <rect x="727" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="743" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="759" y="408" width="10" height="10" rx="2" fill="#ffee58" filter="url(#glow)"/>
+
+    <!-- 照明塔（右外） -->
+    <rect x="962" y="390" width="16" height="370" fill="#37474f"/>
+    <rect x="932" y="374" width="76" height="26"  rx="5" fill="#546e7a"/>
+    <rect x="936" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="954" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="972" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+    <rect x="990" y="366" width="12" height="12" rx="2" fill="#ffee58" filter="url(#glow)"/>
+
+    <!-- asaken テキスト -->
+    <text
+      x="540" y="520"
+      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+      font-size="178"
+      font-weight="800"
+      fill="white"
+      text-anchor="middle"
+      letter-spacing="5"
+      filter="url(#textShadow)"
+    >asaken</text>
+
+    <!-- ツタの壁 -->
+    <rect x="0" y="700" width="1080" height="75" fill="url(#ivyGrad)"/>
+    <circle cx="60"   cy="726" r="22" fill="#2e7d32" fill-opacity="0.55"/>
+    <circle cx="118"  cy="714" r="18" fill="#388e3c" fill-opacity="0.5"/>
+    <circle cx="180"  cy="730" r="20" fill="#33691e" fill-opacity="0.55"/>
+    <circle cx="248"  cy="716" r="24" fill="#2e7d32" fill-opacity="0.5"/>
+    <circle cx="320"  cy="728" r="18" fill="#388e3c" fill-opacity="0.55"/>
+    <circle cx="395"  cy="718" r="22" fill="#33691e" fill-opacity="0.5"/>
+    <circle cx="475"  cy="732" r="19" fill="#2e7d32" fill-opacity="0.55"/>
+    <circle cx="540"  cy="716" r="21" fill="#388e3c" fill-opacity="0.5"/>
+    <circle cx="612"  cy="730" r="18" fill="#33691e" fill-opacity="0.55"/>
+    <circle cx="685"  cy="718" r="23" fill="#2e7d32" fill-opacity="0.5"/>
+    <circle cx="760"  cy="728" r="20" fill="#388e3c" fill-opacity="0.55"/>
+    <circle cx="836"  cy="716" r="18" fill="#33691e" fill-opacity="0.5"/>
+    <circle cx="905"  cy="730" r="22" fill="#2e7d32" fill-opacity="0.55"/>
+    <circle cx="972"  cy="718" r="19" fill="#388e3c" fill-opacity="0.5"/>
+    <circle cx="1030" cy="726" r="20" fill="#33691e" fill-opacity="0.55"/>
+
+    <!-- 外野芝 -->
+    <rect x="0"   y="775" width="1080" height="305" fill="#43a047"/>
+    <rect x="0"   y="775" width="180"  height="305" fill="#3d9142" fill-opacity="0.7"/>
+    <rect x="180" y="775" width="180"  height="305" fill="#388e3c" fill-opacity="0.7"/>
+    <rect x="360" y="775" width="180"  height="305" fill="#3d9142" fill-opacity="0.7"/>
+    <rect x="540" y="775" width="180"  height="305" fill="#388e3c" fill-opacity="0.7"/>
+    <rect x="720" y="775" width="180"  height="305" fill="#3d9142" fill-opacity="0.7"/>
+    <rect x="900" y="775" width="180"  height="305" fill="#388e3c" fill-opacity="0.7"/>
+
+    <!-- 内野土 -->
+    <ellipse cx="540" cy="1060" rx="370" ry="200" fill="url(#infieldGrad)"/>
+
+    <!-- ファウルライン -->
+    <line x1="540" y1="870" x2="40"   y2="785" stroke="white" stroke-width="4" stroke-opacity="0.55"/>
+    <line x1="540" y1="870" x2="1040" y2="785" stroke="white" stroke-width="4" stroke-opacity="0.55"/>
+  </g>
+</svg>
