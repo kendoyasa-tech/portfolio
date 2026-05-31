@@ -12,54 +12,150 @@
       align-items: center;
       padding: 40px 20px;
       gap: 24px;
+      margin: 0;
     }
-    h1 { font-size: 1.2rem; color: #1a1a2e; }
-    canvas {
-      width: 360px;
-      height: 360px;
+    h1 { font-size: 1.1rem; color: #1a1a2e; margin: 0; }
+    #preview {
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background: #1e78e0;
+    }
+    #preview canvas {
+      width: 320px;
+      height: 320px;
     }
     button {
-      padding: 14px 48px;
+      padding: 16px 52px;
       background: #2563eb;
       color: white;
       border: none;
       border-radius: 12px;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
     }
     button:hover { background: #1d4ed8; }
-    p { font-size: 0.85rem; color: #888; }
+    p { font-size: 0.82rem; color: #999; margin: 0; text-align: center; }
   </style>
 </head>
 <body>
-  <h1>インスタ プロフィール画像 (1080×1080 PNG)</h1>
-  <canvas id="canvas" width="1080" height="1080"></canvas>
-  <button id="dlBtn">PNG をダウンロード</button>
-  <p>ダウンロードしたPNGをInstagramのプロフィール写真に設定してください</p>
+  <h1>インスタ プロフィール画像（1080×1080 PNG）</h1>
+
+  <div id="preview">
+    <canvas id="canvas" width="1080" height="1080"></canvas>
+  </div>
+
+  <button id="dlBtn">⬇ PNG をダウンロード</button>
+  <p>ダウンロードした PNG をスマホに送って<br>Instagram のプロフィール写真に設定してください</p>
+
+  <svg id="srcSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080" style="display:none">
+    <defs>
+      <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#0a3d8f"/>
+        <stop offset="55%" stop-color="#1e78e0"/>
+        <stop offset="100%" stop-color="#5fb3f5"/>
+      </linearGradient>
+      <linearGradient id="ivyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#558b2f"/>
+        <stop offset="100%" stop-color="#33691e"/>
+      </linearGradient>
+      <linearGradient id="infieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#a1887f"/>
+        <stop offset="100%" stop-color="#795548"/>
+      </linearGradient>
+      <filter id="textShadow">
+        <feDropShadow dx="0" dy="5" stdDeviation="14" flood-color="rgba(0,0,0,0.65)"/>
+      </filter>
+      <filter id="glow">
+        <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="rgba(255,238,88,0.8)"/>
+      </filter>
+      <clipPath id="circle">
+        <circle cx="540" cy="540" r="540"/>
+      </clipPath>
+    </defs>
+    <g clip-path="url(#circle)">
+      <rect width="1080" height="1080" fill="url(#sky)"/>
+      <ellipse cx="185" cy="195" rx="118" ry="64" fill="white" fill-opacity="0.93"/>
+      <ellipse cx="278" cy="165" rx="88" ry="56" fill="white" fill-opacity="0.93"/>
+      <ellipse cx="118" cy="228" rx="74" ry="46" fill="white" fill-opacity="0.88"/>
+      <ellipse cx="875" cy="165" rx="128" ry="68" fill="white" fill-opacity="0.90"/>
+      <ellipse cx="968" cy="138" rx="90" ry="54" fill="white" fill-opacity="0.87"/>
+      <ellipse cx="808" cy="196" rx="76" ry="46" fill="white" fill-opacity="0.85"/>
+      <ellipse cx="510" cy="118" rx="72" ry="38" fill="white" fill-opacity="0.72"/>
+      <ellipse cx="575" cy="98" rx="54" ry="30" fill="white" fill-opacity="0.68"/>
+      <rect x="102" y="390" width="16" height="370" fill="#37474f"/>
+      <rect x="72" y="374" width="76" height="26" rx="5" fill="#546e7a"/>
+      <rect x="76" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="94" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="112" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="130" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="318" y="430" width="13" height="330" fill="#37474f"/>
+      <rect x="292" y="415" width="65" height="22" rx="4" fill="#546e7a"/>
+      <rect x="296" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="312" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="328" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="749" y="430" width="13" height="330" fill="#37474f"/>
+      <rect x="723" y="415" width="65" height="22" rx="4" fill="#546e7a"/>
+      <rect x="727" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="743" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="759" y="408" width="10" height="10" rx="2" fill="#ffee58"/>
+      <rect x="962" y="390" width="16" height="370" fill="#37474f"/>
+      <rect x="932" y="374" width="76" height="26" rx="5" fill="#546e7a"/>
+      <rect x="936" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="954" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="972" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <rect x="990" y="366" width="12" height="12" rx="2" fill="#ffee58"/>
+      <text x="540" y="520" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="178" font-weight="800" fill="white" text-anchor="middle" letter-spacing="5" filter="url(#textShadow)">asaken</text>
+      <rect x="0" y="700" width="1080" height="75" fill="url(#ivyGrad)"/>
+      <circle cx="60" cy="726" r="22" fill="#2e7d32" fill-opacity="0.55"/>
+      <circle cx="118" cy="714" r="18" fill="#388e3c" fill-opacity="0.5"/>
+      <circle cx="180" cy="730" r="20" fill="#33691e" fill-opacity="0.55"/>
+      <circle cx="248" cy="716" r="24" fill="#2e7d32" fill-opacity="0.5"/>
+      <circle cx="320" cy="728" r="18" fill="#388e3c" fill-opacity="0.55"/>
+      <circle cx="395" cy="718" r="22" fill="#33691e" fill-opacity="0.5"/>
+      <circle cx="475" cy="732" r="19" fill="#2e7d32" fill-opacity="0.55"/>
+      <circle cx="540" cy="716" r="21" fill="#388e3c" fill-opacity="0.5"/>
+      <circle cx="612" cy="730" r="18" fill="#33691e" fill-opacity="0.55"/>
+      <circle cx="685" cy="718" r="23" fill="#2e7d32" fill-opacity="0.5"/>
+      <circle cx="760" cy="728" r="20" fill="#388e3c" fill-opacity="0.55"/>
+      <circle cx="836" cy="716" r="18" fill="#33691e" fill-opacity="0.5"/>
+      <circle cx="905" cy="730" r="22" fill="#2e7d32" fill-opacity="0.55"/>
+      <circle cx="972" cy="718" r="19" fill="#388e3c" fill-opacity="0.5"/>
+      <circle cx="1030" cy="726" r="20" fill="#33691e" fill-opacity="0.55"/>
+      <rect x="0" y="775" width="1080" height="305" fill="#43a047"/>
+      <rect x="0" y="775" width="180" height="305" fill="#3d9142" fill-opacity="0.7"/>
+      <rect x="180" y="775" width="180" height="305" fill="#388e3c" fill-opacity="0.7"/>
+      <rect x="360" y="775" width="180" height="305" fill="#3d9142" fill-opacity="0.7"/>
+      <rect x="540" y="775" width="180" height="305" fill="#388e3c" fill-opacity="0.7"/>
+      <rect x="720" y="775" width="180" height="305" fill="#3d9142" fill-opacity="0.7"/>
+      <rect x="900" y="775" width="180" height="305" fill="#388e3c" fill-opacity="0.7"/>
+      <ellipse cx="540" cy="1060" rx="370" ry="200" fill="url(#infieldGrad)"/>
+      <line x1="540" y1="870" x2="40" y2="785" stroke="white" stroke-width="4" stroke-opacity="0.55"/>
+      <line x1="540" y1="870" x2="1040" y2="785" stroke="white" stroke-width="4" stroke-opacity="0.55"/>
+    </g>
+  </svg>
 
   <script>
-    const svgUrl = 'instagram-profile-static.svg';
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const svgEl = document.getElementById('srcSvg');
+
+    const svgStr = new XMLSerializer().serializeToString(svgEl);
+    const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
 
     const img = new Image();
     img.onload = () => {
-      const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, 1080, 1080);
+      URL.revokeObjectURL(url);
     };
-
-    fetch(svgUrl)
-      .then(r => r.text())
-      .then(svgText => {
-        const blob = new Blob([svgText], { type: 'image/svg+xml' });
-        img.src = URL.createObjectURL(blob);
-      });
+    img.src = url;
 
     document.getElementById('dlBtn').onclick = () => {
-      const canvas = document.getElementById('canvas');
       const a = document.createElement('a');
       a.download = 'instagram-profile.png';
       a.href = canvas.toDataURL('image/png');
