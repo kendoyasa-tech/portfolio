@@ -221,11 +221,19 @@ nav {
 .work-img {
   height: 200px;
   background: #dde3ed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-  font-size: 0.95rem;
+  overflow: hidden;
+}
+
+.work-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s ease;
+}
+
+.work-card:hover .work-img img {
+  transform: scale(1.04);
 }
 
 .work-info {
