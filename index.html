@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>asaken | WEB制作</title>
+  <title>asaken | Web制作</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,6 +18,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">HOME</a></li>
         <li><a href="#about">自己紹介</a></li>
+        <li><a href="#skill">スキル</a></li>
         <li><a href="#service">サービス</a></li>
         <li><a href="#works">制作実績</a></li>
         <li><a href="#flow">制作の流れ</a></li>
@@ -30,8 +31,8 @@
   <section id="home" class="hero">
     <div class="hero-content">
       <h1>ASAKEN</h1>
-      <p class="hero-sub">kenichiasano</p>
-      <p>リーズナブルで高品質なホームページ制作<br>あなたのビジネスの前進をサポート致します</p>
+      <p class="hero-sub">Kenichi Asano（浅野 剣市）</p>
+      <p>医療・地域ビジネスに、伝わるWebサイトを<br>医療現場で培った対話力を活かし、課題の整理から公開後の運用まで丁寧にサポートいたします</p>
       <a href="#contact" class="btn-hero">お問い合わせ</a>
     </div>
   </section>
@@ -42,106 +43,301 @@
       <h2 class="section-title">ABOUT</h2>
       <div class="about-inner">
         <div class="about-photo">
-          <img src="photo.jpg" alt="asaken" class="photo-circle">
+          <img src="photo.jpg" alt="浅野 剣市" class="photo-circle">
         </div>
         <div class="about-text">
           <p>
-            医療機関で臨床工学技士として勤務しながら、WordPressを用いたweb制作を中心に活動しているフリーランスwebデザイナーです。
+            医療機関で臨床工学技士として勤務しながら、WordPressを用いたWeb制作を中心に活動しているフリーランスWebデザイナーです。
           </p>
           <p>
-            現在はAIとプログラミングも学習中。医療現場の経験とAIを掛け合わせて、新しいことに挑戦中です。
+            医療現場では、患者様やご家族の話を丁寧に聞き取り、専門的な内容をわかりやすい言葉に置き換えて伝えることを日常的に行っています。この対話の経験は、Web制作でお客様のご要望を整理し、本当に必要なものを一緒に見極めていく場面でそのまま活きています。
           </p>
           <p>
-            ただサイトを作るだけではなく、お客様の課題に共に向き合い、根本的な問題解決を目指します。
+            ただサイトを作るだけではなく、お客様の課題に共に向き合い、根本的な問題解決を目指します。医療現場で培ったホスピタリティのある対応と、丁寧なコミュニケーションを大切にしています。
           </p>
           <p>
-            医療現場で培ったホスピタリティーのある対応と、丁寧なコミュニケーションを大切にしています。
+            現在はAIとプログラミングも学習中。医療現場の経験とAIを掛け合わせて、Webサイト以外の課題解決にも挑戦しています。
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- スキル -->
+  <section id="skill" class="section gray">
+    <div class="container">
+      <h2 class="section-title">SKILL</h2>
+      <p class="section-lead">対応できる範囲がわかるよう、習熟の段階もあわせて記載しています。</p>
+      <div class="skill-grid">
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>WordPress</h3>
+            <span class="skill-level level-work">実案件で対応可能</span>
+          </div>
+          <p>オリジナルサイトの構築、既存テーマのカスタマイズ、公開後の更新対応まで対応できます。お客様ご自身で記事やお知らせを更新できる形での納品も可能です。</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>HTML / CSS</h3>
+            <span class="skill-level level-work">実案件で対応可能</span>
+          </div>
+          <p>デザインをもとにしたWebページの実装と、スマートフォン・タブレットまで含めたレスポンシブ対応を、外部ライブラリに頼らず自分で書けます。</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>JavaScript</h3>
+            <span class="skill-level level-personal">個人開発で使用</span>
+          </div>
+          <p>ハンバーガーメニュー、アコーディオン、スクロール連動の動きなど、サイトに必要な基本的な動作を実装できます。大規模なフレームワークの利用は学習中です。</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>Node.js / LINE Messaging API</h3>
+            <span class="skill-level level-personal">個人開発で使用</span>
+          </div>
+          <p>LINE Botの設計から開発・動作確認まで、ひととおり自分で行えます。透析患者向けの記録用Botを個人開発し、実際に動作するところまで作りました。</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>Figma</h3>
+            <span class="skill-level level-personal">個人開発で使用</span>
+          </div>
+          <p>制作前のワイヤーフレームやデザインカンプを作成し、完成イメージを共有しながら進められます。</p>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-head">
+            <h3>AIツール（Claude Code など）</h3>
+            <span class="skill-level level-personal">個人開発で使用</span>
+          </div>
+          <p>アイデアの整理、設計・実装の補助、文章作成などに日常的に活用しています。提案をそのまま使うのではなく、内容を確認したうえで取り入れる進め方をしています。</p>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- サービス -->
-  <section id="service" class="section gray">
+  <section id="service" class="section">
     <div class="container">
       <h2 class="section-title">SERVICE</h2>
+      <p class="section-lead">それぞれ、どこまでお任せいただけるかを具体的に記載しています。ご予算やご事情にあわせて、一部だけのご依頼も承ります。</p>
       <div class="service-grid">
+
         <div class="service-card">
-          <div class="service-icon">🌐</div>
-          <h3>ホームページ制作</h3>
-          <p>企業・店舗・個人のホームページをWordPressで制作します。</p>
+          <div class="service-img">
+            <img src="works/work-hinata.png" alt="ホームページ制作のイメージ">
+          </div>
+          <div class="service-body">
+            <h3>ホームページ制作</h3>
+            <p class="service-lead-text">企業・店舗・個人のホームページを、WordPressで制作します。</p>
+            <ul class="service-list">
+              <li>ヒアリングと企画・構成の作成</li>
+              <li>デザイン（Figmaでの完成イメージのご提示）</li>
+              <li>WordPressでの構築</li>
+              <li>スマートフォン・タブレット表示への対応</li>
+              <li>お問い合わせフォームの設置</li>
+              <li>公開後の更新方法のご説明</li>
+            </ul>
+            <p class="service-scope"><span>対応範囲</span>5〜8ページ程度のサイト一式。サーバー・ドメインの取得代行もご相談いただけます。</p>
+          </div>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">📄</div>
-          <h3>ランディングページ</h3>
-          <p>集客・販売に特化したランディングページを制作します。</p>
+          <div class="service-img">
+            <img src="works/work-ramen.png" alt="ランディングページ制作のイメージ">
+          </div>
+          <div class="service-body">
+            <h3>ランディングページ制作</h3>
+            <p class="service-lead-text">集客・販売に特化した、1ページ完結型のページを制作します。</p>
+            <ul class="service-list">
+              <li>訴求内容の整理と構成案の作成</li>
+              <li>デザイン</li>
+              <li>HTML・CSSでのコーディング</li>
+              <li>表示速度への配慮（外部ライブラリを使わない実装）</li>
+              <li>お申し込みフォーム・予約導線の設置</li>
+            </ul>
+            <p class="service-scope"><span>納品物</span>公開可能な状態のHTML・CSS一式。既存サイト内への設置も対応します。</p>
+          </div>
         </div>
+
         <div class="service-card">
-          <div class="service-icon">🔧</div>
-          <h3>保守・運用サポート</h3>
-          <p>制作後の更新作業・トラブル対応をサポートします。</p>
+          <div class="service-img">
+            <img src="works/work-catbell.png" alt="保守・運用サポートのイメージ">
+          </div>
+          <div class="service-body">
+            <h3>保守・運用サポート</h3>
+            <p class="service-lead-text">公開後のサイトを、安心して使い続けられるようお手伝いします。</p>
+            <ul class="service-list">
+              <li>文章・画像の差し替え、お知らせの追加</li>
+              <li>WordPress本体・テーマ・プラグインの更新</li>
+              <li>表示崩れ・エラーなどの不具合対応</li>
+              <li>バックアップの取得</li>
+              <li>更新方法についてのご相談・操作サポート</li>
+            </ul>
+            <p class="service-scope"><span>対応範囲</span>月額でのご契約のほか、必要なときだけのスポット対応も承ります。他社様が制作されたサイトもご相談ください。</p>
+          </div>
         </div>
+
+        <div class="service-card">
+          <div class="service-img">
+            <img src="works/work-dashboard.png" alt="LINE Bot・業務効率化ツール開発のイメージ">
+          </div>
+          <div class="service-body">
+            <h3>LINE Bot・業務効率化ツール開発</h3>
+            <p class="service-lead-text">現場の「手間がかかっている作業」を、仕組みで減らすお手伝いをします。</p>
+            <ul class="service-list">
+              <li>現状の困りごとのヒアリングと要件整理</li>
+              <li>Node.js・LINE Messaging APIでのLINE Bot開発</li>
+              <li>記録・集計のための簡易的な管理画面の作成</li>
+              <li>導入後の使い方のご説明</li>
+            </ul>
+            <p class="service-scope"><span>得意な領域</span>医療・介護の現場経験があるため、専門的な業務内容もご説明いただければ理解したうえで設計できます。</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- 制作実績 -->
-  <section id="works" class="section">
+  <section id="works" class="section gray">
     <div class="container">
       <h2 class="section-title">WORKS</h2>
+      <p class="section-lead">現在掲載しているものは、学習および個人開発として制作した自主制作物です。各カードの「詳細を見る」から、担当範囲や工夫した点をご覧いただけます。</p>
       <div class="works-grid">
+
         <div class="work-card">
           <div class="work-img">
             <img src="works/work-hinata.png" alt="HINATA NINJA コーポレートサイト">
           </div>
           <div class="work-info">
+            <span class="work-tag">自主制作</span>
             <h3>コーポレートサイト</h3>
-            <p>WordPress / レスポンシブ対応</p>
+            <p class="work-meta">WordPress / レスポンシブ対応</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-hinata">詳細を見る</button>
+            <dl class="work-detail" id="detail-hinata" hidden>
+              <dt>制作の目的</dt>
+              <dd>架空の企業サイトを題材に、コーポレートサイトに必要な情報設計とWordPressでの構築を一通り経験するために制作しました。</dd>
+              <dt>担当範囲</dt>
+              <dd>構成案の作成 / デザイン / WordPress構築 / レスポンシブ対応</dd>
+              <dt>制作期間</dt>
+              <dd>約2週間</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>会社概要・サービス・お問い合わせと情報量が多くなるため、トップページでは各セクションの要点だけを見せ、詳しい内容は下層ページへ誘導する構成にしました。スマートフォンでは1カラムに切り替え、指で押しやすいボタンサイズを確保しています。</dd>
+              <dt>使用技術</dt>
+              <dd>WordPress / HTML / CSS</dd>
+            </dl>
           </div>
         </div>
+
         <div class="work-card">
           <div class="work-img">
             <img src="works/work-ramen.png" alt="RAMEN LOVE ランディングページ">
           </div>
           <div class="work-info">
+            <span class="work-tag">自主制作</span>
             <h3>ランディングページ</h3>
-            <p>HTML・CSS / 高速表示</p>
+            <p class="work-meta">HTML・CSS / 高速表示</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-ramen">詳細を見る</button>
+            <dl class="work-detail" id="detail-ramen" hidden>
+              <dt>制作の目的</dt>
+              <dd>飲食店の集客を想定し、1ページで魅力を伝えきるランディングページの構成を学ぶために制作しました。</dd>
+              <dt>担当範囲</dt>
+              <dd>構成案の作成 / デザイン / HTML・CSSコーディング</dd>
+              <dt>制作期間</dt>
+              <dd>約2週間</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>「料理写真で惹きつける → メニュー → 店舗情報 → 来店の導線」の順に並べ、ページのどこまで読み進めても来店ボタンに戻れるようにしました。外部ライブラリを使わずCSSだけで動きを付けることで、表示速度を落とさない実装にしています。</dd>
+              <dt>使用技術</dt>
+              <dd>HTML / CSS</dd>
+            </dl>
           </div>
         </div>
+
         <div class="work-card">
           <div class="work-img">
             <img src="works/work-catbell.png" alt="catbell 店舗ホームページ">
           </div>
           <div class="work-info">
+            <span class="work-tag">自主制作</span>
             <h3>店舗ホームページ</h3>
-            <p>WordPress / SEO対策済み</p>
+            <p class="work-meta">WordPress / SEO対策済み</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-catbell">詳細を見る</button>
+            <dl class="work-detail" id="detail-catbell" hidden>
+              <dt>制作の目的</dt>
+              <dd>小規模店舗のサイトを想定し、店主様ご自身で更新していけるWordPressサイトを作るために制作しました。</dd>
+              <dt>担当範囲</dt>
+              <dd>デザイン / WordPress構築 / SEOの基本設定</dd>
+              <dt>制作期間</dt>
+              <dd>約2週間</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>更新頻度の高いお知らせやメニューは投稿機能から編集できるようにし、専門知識がなくても運用を続けられる構成にしました。ページタイトルや見出しの階層を整理し、検索結果でどんなお店かが伝わるようにしています。</dd>
+              <dt>使用技術</dt>
+              <dd>WordPress / HTML / CSS</dd>
+            </dl>
           </div>
         </div>
+
         <div class="work-card">
           <div class="work-img work-img-emoji">
             <span style="font-size:64px;">💧</span>
           </div>
           <div class="work-info">
-            <h3>透析ケアBot(LINE Bot)</h3>
-            <p>Node.js / LINE Messaging API<br>臨床工学技士としての知見を活かし、透析患者向けの水分摂取量記録・管理ができるLINE Botを開発。</p>
+            <span class="work-tag">個人開発</span>
+            <h3>透析ケアBot（LINE Bot）</h3>
+            <p class="work-meta">Node.js / LINE Messaging API</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-bot">詳細を見る</button>
+            <dl class="work-detail" id="detail-bot" hidden>
+              <dt>制作の目的</dt>
+              <dd>臨床工学技士として透析患者様と接するなかで、日々の水分摂取量を記録し続けることの難しさを感じ、無理なく続けられる仕組みを作りたいと考えて開発しました。</dd>
+              <dt>担当範囲</dt>
+              <dd>企画 / 要件整理 / Node.jsでの開発 / LINE Messaging APIの連携</dd>
+              <dt>制作期間</dt>
+              <dd>約1か月</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>ご高齢の方にも使っていただけるよう、新しいアプリを入れてもらうのではなく、普段お使いのLINE上で完結する形にしました。記録はメッセージを1通送るだけにして、操作の手間を最小限にしています。</dd>
+              <dt>使用技術</dt>
+              <dd>Node.js / LINE Messaging API</dd>
+            </dl>
           </div>
         </div>
+
         <div class="work-card">
           <div class="work-img">
             <img src="works/work-dashboard.png" alt="クライアントサイト管理ダッシュボードUI">
           </div>
           <div class="work-info">
+            <span class="work-tag">自主制作</span>
             <h3>管理画面ダッシュボードUI</h3>
-            <p>HTML・CSS・JS / AIとの共同設計<br>Claude Codeと対話しながら設計・実装した管理画面UI。デザインシステムのルールをAIに適用させ、一貫性のあるUIを構築。</p>
+            <p class="work-meta">HTML・CSS・JS / AIとの共同設計</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-dashboard">詳細を見る</button>
+            <dl class="work-detail" id="detail-dashboard" hidden>
+              <dt>制作の目的</dt>
+              <dd>お客様のサイトの状況を一目で把握できる管理画面を想定し、デザインのルールを決めたうえで一貫性のあるUIを構築する練習として制作しました。</dd>
+              <dt>担当範囲</dt>
+              <dd>画面設計 / デザインルールの策定 / HTML・CSS・JavaScriptでの実装</dd>
+              <dt>制作期間</dt>
+              <dd>約1週間</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>色・余白・文字サイズのルールを先に決め、それをAI（Claude Code）に共有しながら実装することで、画面全体の見た目を揃えました。AIの提案をそのまま採用するのではなく、決めたルールに合っているかを確認したうえで取り込む進め方をしています。</dd>
+              <dt>使用技術</dt>
+              <dd>HTML / CSS / JavaScript</dd>
+            </dl>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- 制作の流れ -->
-  <section id="flow" class="section gray">
+  <section id="flow" class="section">
     <div class="container">
       <h2 class="section-title">FLOW</h2>
       <div class="flow-list">
@@ -178,16 +374,16 @@
   </section>
 
   <!-- お問い合わせ -->
-  <section id="contact" class="section">
+  <section id="contact" class="section gray">
     <div class="container text-center">
       <h2 class="section-title">CONTACT</h2>
-      <p class="contact-lead">お仕事のご依頼・ご相談はお気軽にどうぞ</p>
+      <p class="contact-lead">お仕事のご依頼・ご相談はお気軽にどうぞ<br>「何から相談すればよいかわからない」という段階でも構いません。</p>
       <a href="mailto:info.asaken@gmail.com" class="btn-contact">お問い合わせはこちら</a>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2026 asaken (kenichiasano). All rights reserved.</p>
+    <p>&copy; 2026 asaken (Kenichi Asano). All rights reserved.</p>
   </footer>
 
   <script>
@@ -201,6 +397,16 @@
       a.addEventListener('click', () => {
         links.classList.remove('open');
         toggle.classList.remove('active');
+      });
+    });
+
+    document.querySelectorAll('.work-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const detail = document.getElementById(btn.getAttribute('aria-controls'));
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        detail.hidden = isOpen;
+        btn.textContent = isOpen ? '詳細を見る' : '閉じる';
       });
     });
   </script>

@@ -147,6 +147,14 @@ nav {
   margin: 16px auto 0;
 }
 
+.section-lead {
+  max-width: 760px;
+  margin: -36px auto 48px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+}
+
 /* ===== 自己紹介 ===== */
 .about-inner {
   display: flex;
@@ -173,35 +181,153 @@ nav {
   color: #444;
 }
 
+/* ===== スキル ===== */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.skill-item {
+  background: #fff;
+  padding: 28px;
+  border-radius: 8px;
+  border-left: 3px solid #2563eb;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.skill-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.skill-head h3 {
+  font-size: 1.05rem;
+  color: #1a1a2e;
+  line-height: 1.5;
+}
+
+.skill-level {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.level-work {
+  background: #e8f0fe;
+  color: #1d4ed8;
+}
+
+.level-personal {
+  background: #f1f3f7;
+  color: #5b6472;
+}
+
+.level-learning {
+  background: #fdf3e7;
+  color: #a1620c;
+}
+
+.skill-item p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
 /* ===== サービス ===== */
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
 }
 
 .service-card {
   background: #fff;
-  padding: 40px 28px;
-  text-align: center;
   border-radius: 8px;
+  overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
 }
 
-.service-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
+.service-img {
+  height: 180px;
+  background: #dde3ed;
+  overflow: hidden;
+}
+
+.service-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.service-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .service-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
   color: #1a1a2e;
 }
 
-.service-card p {
+.service-lead-text {
   font-size: 0.9rem;
   color: #666;
+  margin-bottom: 18px;
+}
+
+.service-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.service-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.8;
+}
+
+.service-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.75em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0.5;
+}
+
+.service-scope {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #eef1f6;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.service-scope span {
+  display: inline-block;
+  background: #eef2fb;
+  color: #2563eb;
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  border-radius: 3px;
+  margin-right: 8px;
 }
 
 /* ===== 制作実績 ===== */
@@ -216,10 +342,13 @@ nav {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .work-img {
   height: 200px;
+  flex-shrink: 0;
   background: #dde3ed;
   overflow: hidden;
 }
@@ -236,8 +365,27 @@ nav {
   transform: scale(1.04);
 }
 
+.work-img-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .work-info {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.work-tag {
+  align-self: flex-start;
+  background: #eef2fb;
+  color: #2563eb;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
 }
 
 .work-info h3 {
@@ -246,9 +394,66 @@ nav {
   color: #1a1a2e;
 }
 
-.work-info p {
+.work-meta {
   font-size: 0.85rem;
   color: #888;
+  margin-bottom: 16px;
+}
+
+.work-toggle {
+  margin-top: auto;
+  align-self: flex-start;
+  background: none;
+  border: 1px solid #cfd8e6;
+  border-radius: 4px;
+  color: #2563eb;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.work-toggle:hover {
+  background: #f2f6fd;
+  border-color: #2563eb;
+}
+
+.work-toggle::after {
+  content: '▼';
+  font-size: 0.6rem;
+  margin-left: 8px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.work-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.work-detail {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #eef1f6;
+}
+
+.work-detail dt {
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: #2563eb;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.work-detail dd {
+  font-size: 0.88rem;
+  color: #555;
+  margin-bottom: 14px;
+  line-height: 1.8;
+}
+
+.work-detail dd:last-child {
+  margin-bottom: 0;
 }
 
 /* ===== 制作の流れ ===== */
@@ -418,6 +623,12 @@ footer {
     margin-bottom: 40px;
   }
 
+  .section-lead {
+    margin: -24px auto 32px;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+
   /* 自己紹介 */
   .about-inner {
     flex-direction: column;
@@ -431,10 +642,34 @@ footer {
     height: 180px;
   }
 
+  /* スキル */
+  .skill-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .skill-item {
+    padding: 22px 20px;
+  }
+
+  .skill-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   /* サービス */
   .service-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .service-img {
+    height: 150px;
+  }
+
+  .service-body {
+    padding: 22px 20px;
   }
 
   /* 制作実績 */

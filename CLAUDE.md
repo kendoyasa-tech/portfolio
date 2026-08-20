@@ -11,7 +11,7 @@ Web 制作の営業用ポートフォリオサイト。素の HTML / CSS / JavaS
 
 | ファイル | 役割 |
 | --- | --- |
-| `index.html` | 全セクション（HOME / ABOUT / SERVICE / WORKS / FLOW / CONTACT）を1ファイルに収めたメインページ |
+| `index.html` | 全セクション（HOME / ABOUT / SKILL / SERVICE / WORKS / FLOW / CONTACT）を1ファイルに収めたメインページ |
 | `style.css` | 全スタイル。レスポンシブはメディアクエリで対応 |
 | `works/` | 制作実績のスクリーンショット（`work-<案件名>.png`） |
 | `photo.jpg` | プロフィール写真（`photo/` は元データの保管用） |
@@ -21,6 +21,7 @@ Web 制作の営業用ポートフォリオサイト。素の HTML / CSS / JavaS
 ## 決めごと
 
 - 依存パッケージを追加しない。CDN も使わず、必要なものは自前で書く。
-- ナビゲーションのハンバーガーメニューは `index.html` 末尾のインライン `<script>` で処理する。JS ファイルは分けない。
-- 制作実績を追加するときは `works/` に画像を置き、`index.html` の `.works-grid` にカードを1つ増やす。
+- ナビゲーションのハンバーガーメニューと制作実績のアコーディオンは `index.html` 末尾のインライン `<script>` で処理する。JS ファイルは分けない。
+- 制作実績を追加するときは `works/` に画像を置き、`index.html` の `.works-grid` にカードを1つ増やす。カード内には種別バッジ（`.work-tag`）と詳細アコーディオン（`.work-toggle` + `.work-detail`）をセットで入れる。`aria-controls` と詳細側の `id` は他と重複しない値にする。
+- 掲載内容は実態と一致させる。自主制作のものを実案件のように見せない。
 - 表示確認はブラウザで `index.html` を直接開けばよい（サーバー不要）。
