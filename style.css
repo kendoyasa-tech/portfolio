@@ -501,6 +501,32 @@ nav {
   margin-bottom: 40px;
 }
 
+.contact-form {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.contact-form iframe {
+  display: block;
+  width: 100%;
+  height: 1180px;
+  border: 0;
+}
+
+.contact-mail {
+  margin-top: 28px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contact-mail a {
+  color: #2563eb;
+}
+
 .btn-contact {
   display: inline-block;
   background: #2563eb;
@@ -691,6 +717,10 @@ footer {
   }
 
   /* お問い合わせ */
+  .contact-form iframe {
+    height: 1290px;
+  }
+
   .btn-contact {
     padding: 14px 36px;
     font-size: 0.95rem;
