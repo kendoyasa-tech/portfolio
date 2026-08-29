@@ -584,6 +584,122 @@ footer {
 }
 
 /* ===== レスポンシブ（768px以下） ===== */
+/* ===== 医療機関の方へ ===== */
+.hero-catch {
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.medical {
+  background: linear-gradient(160deg, #eef4ff 0%, #f7fbff 60%, #ffffff 100%);
+  border-top: 1px solid #e3ebf8;
+  border-bottom: 1px solid #e3ebf8;
+}
+
+.medical-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.medical-text p {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.medical-points {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+}
+
+.medical-points li {
+  background: #fff;
+  border-radius: 8px;
+  border-left: 3px solid #2563eb;
+  padding: 20px 22px;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.07);
+}
+
+.medical-points h3 {
+  font-size: 1rem;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+}
+
+.medical-points p {
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.medical-note {
+  margin-top: 36px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: #555;
+}
+
+.medical-cta {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-medical {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 14px 36px;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-medical:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* ===== 実績カードの追加要素 ===== */
+.work-tag.tag-medical {
+  background: #e6f6f2;
+  color: #17796a;
+  font-weight: bold;
+}
+
+.work-links {
+  margin-bottom: 14px;
+}
+
+.work-links a {
+  font-size: 0.85rem;
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(37,99,235,0.4);
+  padding-bottom: 1px;
+}
+
+.work-links a::after {
+  content: "↗";
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+
+.work-links a:hover {
+  border-bottom-color: #2563eb;
+}
+
+/* ===== スキルのスライダー（スマートフォンのみ有効） ===== */
+.skill-dots,
+.skill-swipe-hint {
+  display: none;
+}
+
 @media (max-width: 768px) {
 
   /* ナビゲーション */
@@ -669,20 +785,99 @@ footer {
     height: 180px;
   }
 
-  /* スキル */
-  .skill-grid {
+  /* 医療機関の方へ */
+  .medical-inner {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 28px;
+  }
+
+  .medical-text p {
+    font-size: 0.95rem;
+  }
+
+  .medical-note {
+    text-align: left;
+    font-size: 0.88rem;
+  }
+
+  .btn-medical {
+    display: block;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  /* スキル（横スワイプのスライダー） */
+  .skill-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -20px;
+    padding: 4px 20px 8px;
+    scroll-padding-left: 20px;
+  }
+
+  .skill-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .skill-item {
-    padding: 22px 20px;
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+    padding: 24px 20px;
   }
 
   .skill-head {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .skill-dots {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 14px;
+  }
+
+  .skill-dot {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .skill-dot::before {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: #cfd8e6;
+    transition: background 0.2s, inset 0.2s;
+  }
+
+  .skill-dot.active::before {
+    inset: 5px;
+    background: #2563eb;
+  }
+
+  .skill-swipe-hint {
+    display: block;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #8894a5;
+    margin-top: 8px;
+  }
+
+  /* 実績カード */
+  .work-links a {
+    font-size: 0.88rem;
   }
 
   /* サービス */
