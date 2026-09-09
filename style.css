@@ -672,6 +672,12 @@ footer {
   font-weight: bold;
 }
 
+.work-tag.tag-client {
+  background: #fff3e0;
+  color: #c2620a;
+  font-weight: bold;
+}
+
 .work-links {
   margin-bottom: 14px;
 }
