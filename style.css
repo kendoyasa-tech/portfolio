@@ -988,3 +988,14 @@ footer {
 .nobreak {
   display: inline-block;
 }
+
+/* 制作実績の動画（縦型リール） */
+.work-video {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 9 / 16;
+  margin: 4px auto 0;
+  border-radius: 8px;
+  background: #000;
+}
