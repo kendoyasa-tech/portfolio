@@ -983,3 +983,8 @@ footer {
     font-size: 0.95rem;
   }
 }
+
+/* 見出しの不自然な改行を防ぐ（語句のまとまりで折り返す） */
+.nobreak {
+  display: inline-block;
+}
