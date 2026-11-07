@@ -29,23 +29,75 @@ body {
 }
 .demo-bar a { color: #ffd9e0; margin-left: 8px; }
 
-/* ---------- ヘッダー ---------- */
+/* ---------- ヘッダー(ポートフォリオのトップと同じ見せ方) ---------- */
+/* 背景写真を入れるときは、下の --hero-img を url("hero.jpg") に変えるだけでよい */
 .hero {
-  padding: 48px 16px 40px;
-  text-align: center;
-  background: linear-gradient(180deg, var(--purple-light), var(--white));
+  --hero-img: none;
+  position: relative;
+  overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  padding: 64px 80px;
+  color: var(--white);
+  background:
+    linear-gradient(120deg, rgba(43, 14, 70, .88) 0%, rgba(91, 42, 134, .72) 55%, rgba(200, 16, 46, .55) 100%),
+    var(--hero-img) center / cover no-repeat,
+    radial-gradient(ellipse at 80% 30%, #7b4bb0 0%, #3d1a5e 60%, #24103a 100%);
   border-bottom: 6px solid var(--red);
 }
-.emblem { margin-bottom: 8px; }
-.hero-sub { margin: 0; color: var(--purple); font-size: 14px; letter-spacing: .1em; }
-.hero h1 {
-  margin: 4px 0 12px;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-  font-size: clamp(26px, 5vw, 40px);
-  color: var(--red);
-  letter-spacing: .06em;
+.hero-emblem {
+  position: absolute;
+  right: -6vw;
+  top: 50%;
+  width: min(62vw, 620px);
+  transform: translateY(-50%);
+  opacity: .16;
+  pointer-events: none;
 }
-.hero-lead { margin: 0; color: var(--muted); }
+.hero-emblem svg { display: block; width: 100%; height: auto; }
+.hero-content { position: relative; max-width: 720px; }
+.hero-en {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .3em;
+  opacity: .75;
+}
+.hero h1 {
+  margin: 0 0 14px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: bold;
+  line-height: 1.25;
+  letter-spacing: .12em;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, .35);
+}
+.hero-sub { margin: 0 0 28px; font-size: 15px; letter-spacing: .15em; opacity: .85; }
+.hero-catch {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 2px 14px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: .08em;
+  background: var(--red);
+}
+.hero-lead { margin: 0 0 36px; font-size: 16px; line-height: 2; opacity: .92; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; }
+.btn-hero {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 2px solid var(--white);
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: .1em;
+  font-size: 15px;
+  transition: background .3s, color .3s;
+}
+.btn-hero:hover { background: var(--white); color: var(--purple); }
+.btn-hero-sub { border-color: rgba(255, 255, 255, .55); }
+.sp { display: none; }
+#kouka { scroll-margin-top: 16px; }
 
 main { max-width: 860px; margin: 0 auto; padding: 32px 16px 16px; }
 
@@ -314,8 +366,15 @@ select:focus { outline: none; border-color: var(--purple); }
 
 @media (max-width: 600px) {
   main { padding: 20px 12px 8px; }
-  .hero { padding: 32px 16px 28px; }
+  .hero { min-height: 82vh; padding: 48px 20px; justify-content: center; text-align: center; }
+  .hero-emblem { right: 50%; width: 120vw; transform: translate(50%, -50%); opacity: .1; }
+  .hero h1 { font-size: 42px; letter-spacing: .08em; }
+  .sp { display: inline; }
+  .hero-sub { font-size: 13px; letter-spacing: .08em; }
+  .hero-catch { font-size: 16px; }
   .hero-lead { font-size: 14px; }
+  .hero-buttons { flex-direction: column; }
+  .btn-hero { padding: 14px 20px; }
   .panel, .paper { padding: 18px 14px; border-radius: 12px; }
   .pc { display: none; }
   .btn { flex: 1 1 100%; min-height: 52px; font-size: 17px; }
