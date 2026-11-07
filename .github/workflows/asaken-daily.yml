@@ -1,0 +1,29 @@
+# asaken(@ninjacode482651)用 毎日のサービス紹介
+# 毎日18時(日本時間)ごろ、ポートフォリオのサービス紹介文を1つ選んで Discord に送る。
+# Discord には「Xに投稿する」リンクも付くので、タップして投稿する(X API は有料のため使わない)。
+# GitHub の定時実行は混雑で遅れることがあるため、17時45分に起動するようにしている。
+
+name: asaken 毎日のサービス紹介
+
+on:
+  schedule:
+    - cron: "45 8 * * *"   # UTC 8:45 = 日本時間 17:45
+  workflow_dispatch:       # Actions タブから手動でも実行できる
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 今日のサービス紹介を Discord に送る
+        env:
+          ASAKEN_DISCORD_WEBHOOK_URL: ${{ secrets.ASAKEN_DISCORD_WEBHOOK_URL }}
+        run: node scripts/asaken-daily.mjs
