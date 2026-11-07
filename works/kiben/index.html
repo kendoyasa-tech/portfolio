@@ -38,7 +38,7 @@
 <main>
   <section class="paper daily" id="daily" aria-labelledby="daily-title">
     <p class="paper-name"><span id="daily-title">姫辯スポーツ 朝刊</span><span class="daily-badge">毎朝6時 自動更新</span></p>
-    <p class="daily-lead">毎朝6時に1試合ずつ夏の大会が自動で進みます。結果はこの欄と、Discordの「#姫辯スポーツ」チャンネルに届きます。負けたら翌朝から新しい挑戦です。</p>
+    <p class="daily-lead">毎朝6時に1試合ずつ夏の大会が自動で進みます。結果はこの欄と、Discordの「#姫辯スポーツ」チャンネルに届きます。負けたら翌朝から新しい挑戦です。試合のダイジェスト動画なども随時追加していきます。</p>
     <div class="daily-stats" id="dailyStats"></div>
     <ol class="daily-road" id="dailyRoad" aria-label="今の挑戦の勝ち上がり"></ol>
     <div id="dailyArticle" hidden>
@@ -120,6 +120,7 @@
     <p>試合は1打席ずつ、打者の「ミート・パワー・走力」と投手の「球威・制球・スタミナ」の数値から確率で結果を決めて進めています。9回で同点なら10回からタイブレーク、後攻がリードした時点でサヨナラになります。記事は試合の結果と名場面から、見出し・本文・監督コメントを組み立てています。</p>
     <p>同じ仕組みを Python で作った Discord ボット版もあり、チャットで「!試合 大阪桐蔭」と送ると記事が返ってきます。</p>
     <p>ページ上部の「朝刊」は、GitHub Actions が毎朝6時に Node.js でこのページと同じシミュレーターを動かし、結果を JSON に保存して Discord の Webhook に投稿する仕組みで、サーバーを用意せずに自動で更新しています。</p>
+    <p>今後も、熱闘甲子園風のダイジェスト動画の制作などで、このページは随時更新していきます。</p>
   </section>
 </main>
 
