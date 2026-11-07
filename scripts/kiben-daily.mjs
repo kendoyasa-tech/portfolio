@@ -17,6 +17,7 @@ const DATA = join(root, "works/kiben/data/season.json");
 const PAGE_URL = "https://kendoyasa-tech.github.io/portfolio/works/kiben/";
 const KEEP_GAMES = 60; // ページに残す試合数
 const dryRun = process.argv.includes("--dry-run");
+const repost = process.argv.includes("--repost"); // 試合をせず、最新の試合を投稿し直す(投稿テスト用)
 
 // ブラウザ用の sim.js をそのまま読み込む
 const ctx = { console, Math };
@@ -30,6 +31,24 @@ const jstDate = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 1
 const state = existsSync(DATA)
   ? JSON.parse(readFileSync(DATA, "utf8"))
   : { challenge: 0, round: 0, titles: 0, games: [] };
+
+async function post(text) {
+  const hook = process.env.DISCORD_WEBHOOK_URL;
+  if (!hook) {
+    console.log("DISCORD_WEBHOOK_URL が未設定のため、Discord への投稿は省略しました。");
+    return;
+  }
+  const res = await fetch(hook, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: "姫辯スポーツ", content: text, allowed_mentions: { parse: [] } }),
+  });
+  if (!res.ok) {
+    console.error(`Discord への投稿に失敗しました: ${res.status} ${await res.text()}`);
+    process.exit(1);
+  }
+  console.log("Discord に投稿しました。");
+}
 
 // 前の試合で大会が終わっていたら、新しい挑戦を始める
 const last = state.games[state.games.length - 1];
@@ -103,6 +122,13 @@ function discordMessage(r) {
   return text;
 }
 
+if (repost) {
+  const prev = state.games[state.games.length - 1];
+  if (!prev) { console.log("まだ試合がありません。"); process.exit(0); }
+  await post(discordMessage(prev));
+  process.exit(0);
+}
+
 const message = discordMessage(record);
 
 if (dryRun) {
@@ -117,18 +143,4 @@ state.updated = new Date().toISOString();
 writeFileSync(DATA, JSON.stringify(state, null, 2) + "\n");
 console.log(`保存しました: ${record.date} ${record.stage} ${record.kibenRuns}-${record.oppRuns} ${record.opponent}`);
 
-const hook = process.env.DISCORD_WEBHOOK_URL;
-if (!hook) {
-  console.log("DISCORD_WEBHOOK_URL が未設定のため、Discord への投稿は省略しました。");
-} else {
-  const res = await fetch(hook, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: "姫辯スポーツ", content: message, allowed_mentions: { parse: [] } }),
-  });
-  if (!res.ok) {
-    console.error(`Discord への投稿に失敗しました: ${res.status} ${await res.text()}`);
-    process.exit(1);
-  }
-  console.log("Discord に投稿しました。");
-}
+await post(message);

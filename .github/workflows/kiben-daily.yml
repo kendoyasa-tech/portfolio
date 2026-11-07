@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: "45 20 * * *"   # UTC 20:45 = 日本時間 5:45
   workflow_dispatch:         # Actions タブから手動でも実行できる
+    inputs:
+      repost:
+        description: "試合をせず、最新の試合をDiscordに投稿し直す(投稿テスト用)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -30,7 +35,7 @@ jobs:
       - name: 試合をして Discord に投稿
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: node scripts/kiben-daily.mjs
+        run: node scripts/kiben-daily.mjs ${{ inputs.repost && '--repost' || '' }}
 
       - name: 結果を保存
         run: |
