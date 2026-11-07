@@ -1,0 +1,204 @@
+:root {
+  --purple: #5b2a86;
+  --purple-light: #f2ecf8;
+  --red: #c8102e;
+  --ink: #2b2530;
+  --muted: #6d6575;
+  --paper: #fbf8f1;
+  --line: #ddd5e6;
+  --white: #fff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.8;
+}
+
+.demo-bar {
+  margin: 0;
+  padding: 10px 16px;
+  font-size: 13px;
+  text-align: center;
+  background: var(--purple);
+  color: var(--white);
+}
+.demo-bar a { color: #ffd9e0; margin-left: 8px; }
+
+/* ---------- ヘッダー ---------- */
+.hero {
+  padding: 48px 16px 40px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--purple-light), var(--white));
+  border-bottom: 6px solid var(--red);
+}
+.emblem { margin-bottom: 8px; }
+.hero-sub { margin: 0; color: var(--purple); font-size: 14px; letter-spacing: .1em; }
+.hero h1 {
+  margin: 4px 0 12px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(26px, 5vw, 40px);
+  color: var(--red);
+  letter-spacing: .06em;
+}
+.hero-lead { margin: 0; color: var(--muted); }
+
+main { max-width: 860px; margin: 0 auto; padding: 32px 16px 16px; }
+
+/* ---------- パネル ---------- */
+.panel {
+  margin-bottom: 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+}
+.panel h2 {
+  margin: 0 0 16px;
+  padding-left: 12px;
+  border-left: 6px solid var(--red);
+  font-size: 20px;
+}
+.panel h3 { margin: 20px 0 8px; font-size: 16px; color: var(--purple); }
+.note { margin: -8px 0 12px; color: var(--muted); font-size: 14px; }
+
+.controls { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; font-weight: bold; font-size: 14px; }
+select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+select:focus { outline: none; border-color: var(--purple); }
+.check { font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.check input { width: 18px; height: 18px; accent-color: var(--red); }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  font: inherit;
+  font-weight: bold;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 2px solid var(--red);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(200, 16, 46, .2); }
+.btn-main { background: var(--red); color: var(--white); }
+.btn-sub { background: var(--white); color: var(--red); }
+
+/* ---------- 新聞 ---------- */
+.paper {
+  margin-bottom: 28px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid #e3dccb;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(43, 37, 48, .08);
+  scroll-margin-top: 16px;
+}
+.paper-name {
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--red);
+  border-bottom: 3px double var(--ink);
+}
+.paper-headline {
+  margin: 8px 0 4px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: clamp(22px, 4.2vw, 30px);
+  line-height: 1.4;
+}
+.paper.is-win .paper-headline { color: var(--red); }
+.paper-stage { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+
+.scoreboard-wrap { overflow-x: auto; margin-bottom: 16px; }
+.scoreboard {
+  border-collapse: collapse;
+  min-width: 100%;
+  font-variant-numeric: tabular-nums;
+  background: #1f3b2c;
+  color: #f5f1dc;
+  font-size: 15px;
+}
+.scoreboard th, .scoreboard td {
+  padding: 6px 8px;
+  text-align: center;
+  border: 1px solid #36573f;
+  white-space: nowrap;
+}
+.scoreboard tbody th { text-align: left; }
+.scoreboard .total { color: #ffd84d; font-weight: bold; }
+.scoreboard tr.is-kiben th { color: #ffb3c0; }
+
+.paper-body p { margin: 0 0 12px; text-indent: 1em; }
+.paper-comments { margin: 0; padding: 12px 0 0; list-style: none; border-top: 1px dashed #c9bfa8; }
+.paper-comments li::before { content: "■"; color: var(--red); margin-right: 4px; }
+
+.t-title { margin: 0 0 8px; font-size: 18px; color: var(--purple); }
+.t-list { margin: 0 0 8px; padding: 0; list-style: none; }
+.t-list li { padding: 4px 0; border-bottom: 1px dotted #d8cfba; }
+.t-list .mark { display: inline-block; width: 1.6em; font-weight: bold; }
+.t-list .win .mark { color: var(--red); }
+.t-list small { color: var(--muted); }
+.champ {
+  margin: 12px 0;
+  padding: 12px 14px;
+  background: var(--purple);
+  color: var(--white);
+  border-radius: 8px;
+  font-weight: bold;
+}
+.t-end { color: var(--muted); }
+.t-note { margin: 20px 0 0; color: var(--muted); font-size: 13px; }
+
+/* ---------- 選手 ---------- */
+.roster { width: 100%; border-collapse: collapse; font-size: 15px; }
+.roster th, .roster td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; }
+.roster thead th { background: var(--purple-light); color: var(--purple); }
+.cap {
+  margin-left: 6px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--white);
+}
+.bench {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 6px 12px;
+  font-size: 14px;
+}
+.bench b { color: var(--red); margin-right: 4px; }
+
+.kouka p {
+  margin: 0;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 17px;
+  line-height: 2.2;
+}
+.about p { margin: 0 0 10px; font-size: 15px; color: var(--muted); }
+
+.footer { padding: 24px 16px 40px; text-align: center; }
+.footer a { color: var(--purple); }
+
+@media (max-width: 600px) {
+  .panel, .paper { padding: 18px 16px; }
+  .pc { display: none; }
+  .btn { flex: 1 1 100%; }
+  .scoreboard { font-size: 13px; }
+  .scoreboard th, .scoreboard td { padding: 5px 5px; }
+}
