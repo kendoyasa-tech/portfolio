@@ -161,6 +161,49 @@ select:focus { outline: none; border-color: var(--purple); }
 .t-end { color: var(--muted); }
 .t-note { margin: 20px 0 0; color: var(--muted); font-size: 13px; }
 
+/* ---------- 毎朝の自動試合 ---------- */
+.daily .paper-name { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.daily-badge {
+  padding: 2px 10px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--white);
+  background: var(--purple);
+  border-radius: 999px;
+}
+.daily-lead { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.daily-stats { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 12px; font-size: 14px; }
+.daily-stats b { font-size: 18px; color: var(--red); margin: 0 2px; }
+.daily-road {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.daily-road li { padding: 6px 2px; border-radius: 6px; background: #efe9dc; color: var(--muted); }
+.daily-road .road-mark { display: block; height: 1.4em; font-size: 15px; font-weight: bold; }
+.daily-road .road-stage { display: block; }
+.daily-road .road-opp { display: block; font-weight: bold; color: var(--ink); word-break: keep-all; }
+.daily-road li.win { background: var(--red); color: #ffe3e8; }
+.daily-road li.win .road-opp { color: var(--white); }
+.daily-road li.lose { background: #3a3340; color: #cfc6d6; }
+.daily-road li.lose .road-opp { color: var(--white); }
+.daily-road li.next { outline: 2px dashed var(--purple); background: var(--purple-light); color: var(--purple); }
+.daily-date { margin: 0; font-size: 13px; color: var(--muted); }
+.daily-empty { margin: 8px 0 0; color: var(--muted); }
+.daily-history { margin-top: 16px; }
+.daily-history summary { cursor: pointer; color: var(--purple); font-weight: bold; }
+.daily-history .t-list { max-height: 320px; overflow-y: auto; margin-top: 8px; font-size: 14px; }
+@media (max-width: 560px) {
+  .daily-road { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
 /* ---------- 選手 ---------- */
 .roster { width: 100%; border-collapse: collapse; font-size: 15px; }
 .roster th, .roster td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; }

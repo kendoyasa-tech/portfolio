@@ -1,0 +1,42 @@
+# 姫辯学園琴丘 毎朝の自動試合
+# 毎朝6時(日本時間)ごろに1試合進め、結果をDiscordの #姫辯スポーツ に投稿し、
+# works/kiben/data/season.json を更新してポートフォリオに反映する。
+# GitHub の定時実行は混雑で遅れることがあるため、5時45分に起動するようにしている。
+
+name: 姫辯 毎朝の自動試合
+
+on:
+  schedule:
+    - cron: "45 20 * * *"   # UTC 20:45 = 日本時間 5:45
+  workflow_dispatch:         # Actions タブから手動でも実行できる
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kiben-daily
+  cancel-in-progress: false
+
+jobs:
+  play:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 試合をして Discord に投稿
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node scripts/kiben-daily.mjs
+
+      - name: 結果を保存
+        run: |
+          git config user.name "kiben-sports-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add works/kiben/data/season.json
+          git diff --cached --quiet && exit 0
+          git commit -m "姫辯スポーツ $(TZ=Asia/Tokyo date +%Y-%m-%d) の試合結果"
+          git push

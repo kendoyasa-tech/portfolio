@@ -36,6 +36,25 @@
 </header>
 
 <main>
+  <section class="paper daily" id="daily" aria-labelledby="daily-title">
+    <p class="paper-name"><span id="daily-title">姫辯スポーツ 朝刊</span><span class="daily-badge">毎朝6時 自動更新</span></p>
+    <p class="daily-lead">毎朝6時に1試合ずつ夏の大会が自動で進みます。結果はこの欄と、Discordの「#姫辯スポーツ」チャンネルに届きます。負けたら翌朝から新しい挑戦です。</p>
+    <div class="daily-stats" id="dailyStats"></div>
+    <ol class="daily-road" id="dailyRoad" aria-label="今の挑戦の勝ち上がり"></ol>
+    <div id="dailyArticle" hidden>
+      <p class="daily-date" id="dailyDate"></p>
+      <h2 class="paper-headline" id="dailyHeadline"></h2>
+      <p class="paper-stage" id="dailyStage"></p>
+      <div class="scoreboard-wrap"><table class="scoreboard" id="dailyScoreboard"></table></div>
+      <div class="paper-body" id="dailyBody"></div>
+      <ul class="paper-comments" id="dailyComments"></ul>
+    </div>
+    <p class="daily-empty" id="dailyEmpty" hidden>第1試合は、明日の朝6時に行われます。</p>
+    <details class="daily-history" id="dailyHistoryWrap" hidden>
+      <summary>これまでの試合</summary>
+      <ol class="t-list" id="dailyHistory"></ol>
+    </details>
+  </section>
   <section class="panel" aria-labelledby="play-title">
     <h2 id="play-title">試合をする</h2>
     <div class="controls">
@@ -100,6 +119,7 @@
     <h2 id="about-title">このページについて</h2>
     <p>試合は1打席ずつ、打者の「ミート・パワー・走力」と投手の「球威・制球・スタミナ」の数値から確率で結果を決めて進めています。9回で同点なら10回からタイブレーク、後攻がリードした時点でサヨナラになります。記事は試合の結果と名場面から、見出し・本文・監督コメントを組み立てています。</p>
     <p>同じ仕組みを Python で作った Discord ボット版もあり、チャットで「!試合 大阪桐蔭」と送ると記事が返ってきます。</p>
+    <p>ページ上部の「朝刊」は、GitHub Actions が毎朝6時に Node.js でこのページと同じシミュレーターを動かし、結果を JSON に保存して Discord の Webhook に投稿する仕組みで、サーバーを用意せずに自動で更新しています。</p>
   </section>
 </main>
 
@@ -177,6 +197,56 @@
       '<p class="t-note">▼ 最後の試合の記事</p>';
     showGame(last);
   });
+
+  // ---- 毎朝の自動試合(data/season.json) ----
+  (async function daily() {
+    let data;
+    try {
+      const res = await fetch(`data/season.json?t=${Date.now()}`, { cache: "no-store" });
+      data = await res.json();
+    } catch (e) {
+      $("dailyEmpty").textContent = "朝刊を読み込めませんでした。時間をおいて開き直してください。";
+      $("dailyEmpty").hidden = false;
+      return;
+    }
+    const games = data.games || [];
+    if (!games.length) { $("dailyEmpty").hidden = false; return; }
+
+    const last = games[games.length - 1];
+    const wins = games.filter(g => g.won).length;
+    $("dailyStats").innerHTML =
+      `<span><b>${data.challenge}</b>回目の挑戦</span>` +
+      `<span>通算 <b>${wins}</b>勝<b>${games.length - wins}</b>敗</span>` +
+      `<span>優勝 <b>${data.titles || 0}</b>回</span>`;
+
+    // 今の挑戦の勝ち上がり
+    const cur = games.filter(g => g.challenge === last.challenge);
+    $("dailyRoad").innerHTML = K.TOURNAMENT.map((opp, i) => {
+      const g = cur.find(x => x.round === i);
+      const cls = g ? (g.won ? "win" : "lose") : (i === (last.won ? last.round + 1 : -1) ? "next" : "");
+      const mark = g ? (g.won ? "○" : "●") : (cls === "next" ? "次" : "");
+      const stage = K.OPPONENTS[opp][2].replace("兵庫大会 ", "兵庫").replace("甲子園 ", "");
+      return `<li class="${cls}"><span class="road-mark">${mark}</span><span class="road-stage">${esc(stage)}</span><span class="road-opp">${esc(K.SHORT_NAMES[opp] || opp)}</span></li>`;
+    }).join("");
+
+    // 最新の記事
+    $("dailyDate").textContent = `${last.date.replace(/-/g, "/")} 朝刊 ・ ${last.challenge}回目の挑戦`;
+    $("dailyHeadline").textContent = last.headline;
+    $("dailyStage").textContent = `【${last.stage}】${last.stadium}`;
+    $("dailyScoreboard").innerHTML = scoreboard(last);
+    $("dailyBody").innerHTML = last.paras.map(p => `<p>${esc(p)}</p>`).join("") +
+      (last.champion ? '<p class="champ">🏆 姫辯学園琴丘、甲子園初優勝! 甲子園に校歌が響く——</p>' : "");
+    $("dailyComments").innerHTML = last.comments.map(c => `<li>${esc(c)}</li>`).join("");
+    $("daily").classList.toggle("is-win", last.won);
+    $("dailyArticle").hidden = false;
+
+    // これまでの試合(新しい順)
+    $("dailyHistory").innerHTML = games.slice().reverse().map(g => {
+      const extra = (g.innings >= 10 ? `延長${g.innings}回` : "") + (g.walkoff ? " サヨナラ" : "");
+      return `<li class="${g.won ? "win" : "lose"}"><span class="mark">${g.won ? "○" : "●"}</span>${esc(g.date.slice(5).replace("-", "/"))} ${esc(g.stage)} <b>${g.kibenRuns}-${g.oppRuns}</b> ${esc(g.opponent)}${extra ? `<small>(${extra.trim()})</small>` : ""}${g.champion ? " 🏆" : ""}</li>`;
+    }).join("");
+    $("dailyHistoryWrap").hidden = false;
+  })();
 
   // ---- 校歌の再生(どのボタンからでも同じ音源を流す/止める) ----
   const song = $("song");

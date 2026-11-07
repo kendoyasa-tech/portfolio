@@ -16,6 +16,7 @@ Web 制作の営業用ポートフォリオサイト。素の HTML / CSS / JavaS
 | `works/` | 制作実績のスクリーンショット（`work-<案件名>.jpg`） |
 | `works/dental/` | 実績として公開している架空の歯科医院サイト（`index.html` / `style.css`）。本体とは独立したCSSで、医療系の制作物として実物を閲覧できるようにしている |
 | `service/` | サービス欄のイメージ画像（`svc-<サービス名>.jpg`）。実績欄と絵が被らないページを選ぶ |
+| `works/kiben/` | 姫辯学園の試合シミュレーター。`data/season.json` は毎朝6時に GitHub Actions（`.github/workflows/kiben-daily.yml` → `scripts/kiben-daily.mjs`）が自動更新するので手で編集しない。Discord 投稿先は Secret `DISCORD_WEBHOOK_URL` |
 | `photo.jpg` | プロフィール写真（`photo/` は元データの保管用） |
 | `linkinbio.html` / `linkinbio.css` | Instagram プロフィール用のリンク集ページ |
 | `*.svg` / `instagram-profile-export.html` | Instagram 投稿画像の素材と書き出し用ページ。サイト本体からは参照されない |
