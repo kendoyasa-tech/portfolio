@@ -625,6 +625,12 @@
     <p>&copy; 2026 asaken（浅野 剣市）. All rights reserved.</p>
   </footer>
 
+  <!-- BGM（押した人にだけ流れる） -->
+  <button class="bgm-toggle" id="bgmToggle" type="button" aria-pressed="false" aria-label="BGM（姫辯学園琴丘高校 校歌）を流す">
+    <span class="bgm-icon" aria-hidden="true">♪</span><span class="bgm-label">BGMを流す</span>
+  </button>
+  <audio id="bgmAudio" src="works/kiben/kouka.m4a" preload="none"></audio>
+
   <script>
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
@@ -682,6 +688,27 @@
     buildDots();
     skillGrid.addEventListener('scroll', syncDots, { passive: true });
     window.addEventListener('resize', buildDots);
+
+    const bgmBtn = document.getElementById('bgmToggle');
+    const bgm = document.getElementById('bgmAudio');
+    const setBgmState = (playing) => {
+      bgmBtn.classList.toggle('playing', playing);
+      bgmBtn.setAttribute('aria-pressed', String(playing));
+      bgmBtn.querySelector('.bgm-label').textContent = playing ? '止める' : 'BGMを流す';
+    };
+    bgmBtn.addEventListener('click', () => {
+      if (bgm.paused) {
+        bgm.play().then(() => setBgmState(true)).catch(() => setBgmState(false));
+      } else {
+        bgm.pause();
+        setBgmState(false);
+      }
+    });
+    bgm.addEventListener('ended', () => { bgm.currentTime = 0; setBgmState(false); });
+    // 実績の動画を再生したらBGMは止める
+    document.querySelectorAll('.work-video').forEach(v => {
+      v.addEventListener('play', () => { if (!bgm.paused) { bgm.pause(); setBgmState(false); } });
+    });
   </script>
 
 </body>

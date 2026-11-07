@@ -544,6 +544,56 @@ nav {
 }
 
 /* ===== フッター ===== */
+/* ===== BGMボタン ===== */
+.bgm-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #2563eb;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2563eb;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: background 0.2s, color 0.2s;
+}
+
+.bgm-toggle:hover,
+.bgm-toggle.playing {
+  background: #2563eb;
+  color: #fff;
+}
+
+.bgm-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.bgm-toggle.playing .bgm-icon {
+  animation: bgm-bounce 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes bgm-bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-3px); }
+}
+
+@media (max-width: 768px) {
+  .bgm-toggle {
+    right: 14px;
+    bottom: 14px;
+    padding: 12px 16px;
+  }
+}
+
 footer {
   background: #1a1a2e;
   color: #888;
