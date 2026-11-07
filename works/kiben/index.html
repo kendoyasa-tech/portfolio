@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>姫辯学園琴丘高校 野球部 試合シミュレーター</title>
+<meta name="description" content="自主制作の架空の高校「姫辯学園琴丘高校」の野球部。ボタンを押すと夏の大会の試合をシミュレーションし、新聞記事風の戦評を自動で作ります。">
+<meta name="theme-color" content="#5b2a86">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%235b2a86'/><text x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='36' font-weight='bold' fill='white'>K</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<p class="demo-bar">これはポートフォリオ用の<strong>自主制作</strong>です。「姫辯学園琴丘高校」と選手・監督は<strong>すべて架空</strong>で、実在の学校・人物とは関係ありません。対戦相手は学校名のみ使用しています。<a href="../../index.html#works">ポートフォリオへ戻る</a></p>
+
+<header class="hero">
+  <div class="emblem" aria-hidden="true">
+    <svg viewBox="0 0 120 120" width="96" height="96">
+      <circle cx="60" cy="60" r="56" fill="#fff" stroke="#5b2a86" stroke-width="5"/>
+      <g fill="#7b4bb0">
+        <ellipse cx="60" cy="34" rx="11" ry="20"/>
+        <ellipse cx="60" cy="34" rx="11" ry="20" transform="rotate(72 60 60)"/>
+        <ellipse cx="60" cy="34" rx="11" ry="20" transform="rotate(144 60 60)"/>
+        <ellipse cx="60" cy="34" rx="11" ry="20" transform="rotate(216 60 60)"/>
+        <ellipse cx="60" cy="34" rx="11" ry="20" transform="rotate(288 60 60)"/>
+      </g>
+      <circle cx="60" cy="60" r="15" fill="#fff"/>
+      <path d="M52 66c4-1 7-5 8-10 1-3 3-5 6-5-2 2-2 5-1 8 1 4-2 8-7 9z" fill="#c8102e"/>
+      <path d="M8 60h14M98 60h14" stroke="#5b2a86" stroke-width="5"/>
+    </svg>
+  </div>
+  <p class="hero-sub">兵庫・姫路 書写の御山のふもと</p>
+  <h1>姫辯学園琴丘高校 野球部</h1>
+  <p class="hero-lead">ボタンを押すと、夏の大会の試合をシミュレーションして<br class="pc">新聞記事風の戦評を自動で書きます。</p>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="play-title">
+    <h2 id="play-title">試合をする</h2>
+    <div class="controls">
+      <label class="field">相手校
+        <select id="opponent"></select>
+      </label>
+      <label class="check"><input type="checkbox" id="mustWin"> 姫辯が勝つ試合にする(シナリオ用)</label>
+      <div class="buttons">
+        <button class="btn btn-main" id="playBtn" type="button">プレイボール</button>
+        <button class="btn btn-sub" id="tournamentBtn" type="button">夏の大会を通しでやる</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper" id="result" aria-live="polite" hidden>
+    <p class="paper-name">姫辯スポーツ</p>
+    <div id="tournament"></div>
+    <h2 class="paper-headline" id="headline"></h2>
+    <p class="paper-stage" id="stage"></p>
+    <div class="scoreboard-wrap"><table class="scoreboard" id="scoreboard"></table></div>
+    <div class="paper-body" id="body"></div>
+    <ul class="paper-comments" id="comments"></ul>
+  </section>
+
+  <section class="panel" aria-labelledby="team-title">
+    <h2 id="team-title">スターティングメンバー</h2>
+    <p class="note">監督:高嶋 等 / 主将:橘 漁介</p>
+    <table class="roster">
+      <thead><tr><th>打順</th><th>守備</th><th>選手</th><th>背番号</th></tr></thead>
+      <tbody id="lineup"></tbody>
+    </table>
+    <h3>ベンチ入り</h3>
+    <ul class="bench" id="bench"></ul>
+  </section>
+
+  <section class="panel kouka" aria-labelledby="kouka-title">
+    <h2 id="kouka-title">校歌(1番)</h2>
+    <p>書写の御山(みやま)に 陽は映えて<br>
+      桔梗輝く 白鷺(はくろ)の麓<br>
+      琴の音(ね)ひびく 丘の上<br>
+      尊女の遺志(みおやのみぶね) 受け継ぎて<br>
+      集える我ら 意気高し<br>
+      我ら我ら琴丘 われらが学園</p>
+  </section>
+
+  <section class="panel about" aria-labelledby="about-title">
+    <h2 id="about-title">このページについて</h2>
+    <p>試合は1打席ずつ、打者の「ミート・パワー・走力」と投手の「球威・制球・スタミナ」の数値から確率で結果を決めて進めています。9回で同点なら10回からタイブレーク、後攻がリードした時点でサヨナラになります。記事は試合の結果と名場面から、見出し・本文・監督コメントを組み立てています。</p>
+    <p>同じ仕組みを Python で作った Discord ボット版もあり、チャットで「!試合 大阪桐蔭」と送ると記事が返ってきます。</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <a href="../../index.html#works">← ポートフォリオへ戻る</a>
+</footer>
+
+<script src="sim.js"></script>
+<script>
+(function () {
+  "use strict";
+  const K = window.Kiben;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // 相手校の選択肢
+  K.TOURNAMENT.forEach(name => {
+    const o = document.createElement("option");
+    o.value = name;
+    o.textContent = `${name}(${K.OPPONENTS[name][2]})`;
+    $("opponent").appendChild(o);
+  });
+
+  // スタメンとベンチ
+  $("lineup").innerHTML = K.LINEUP.map((p, i) =>
+    `<tr><td>${i + 1}</td><td>${p[1]}</td><td>${esc(p[0])}${p[0] === K.CAPTAIN ? '<span class="cap">主将</span>' : ""}</td><td>${p[2]}</td></tr>`).join("");
+  $("bench").innerHTML = K.BENCH.map(b => `<li><b>${b[0]}</b> ${esc(b[1])}(${b[2]})</li>`).join("");
+
+  function scoreboard(g) {
+    const first = g.kibenFirst ? ["kiben", K.TEAM] : ["opp", g.opponent];
+    const second = g.kibenFirst ? ["opp", g.opponent] : ["kiben", K.TEAM];
+    const n = g.innings;
+    let html = "<thead><tr><th></th>";
+    for (let i = 1; i <= n; i++) html += `<th>${i}</th>`;
+    html += "<th>計</th><th>安</th></tr></thead><tbody>";
+    [first, second].forEach(([key, label]) => {
+      const total = key === "kiben" ? g.kibenRuns : g.oppRuns;
+      html += `<tr class="${key === "kiben" ? "is-kiben" : ""}"><th>${esc(K.SHORT_NAMES[label] || label)}</th>`;
+      for (let i = 0; i < n; i++) html += `<td>${g.line[key][i] !== undefined ? esc(g.line[key][i]) : ""}</td>`;
+      html += `<td class="total">${total}</td><td>${g.hits[key]}</td></tr>`;
+    });
+    return html + "</tbody>";
+  }
+
+  function showGame(g) {
+    const a = K.article(g);
+    $("headline").textContent = a.headline;
+    $("stage").textContent = `【${g.stage}】${g.stadium}`;
+    $("scoreboard").innerHTML = scoreboard(g);
+    $("body").innerHTML = a.paras.map(p => `<p>${esc(p)}</p>`).join("");
+    $("comments").innerHTML = a.comments.map(c => `<li>${esc(c)}</li>`).join("");
+    $("result").hidden = false;
+    $("result").classList.toggle("is-win", g.won);
+    $("result").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  $("playBtn").addEventListener("click", () => {
+    $("tournament").innerHTML = "";
+    showGame(K.playGame($("opponent").value, $("mustWin").checked));
+  });
+
+  $("tournamentBtn").addEventListener("click", () => {
+    const games = K.playTournament($("mustWin").checked);
+    const rows = games.map(g => {
+      const extra = (g.innings >= 10 ? `延長${g.innings}回` : "") + (g.walkoff ? " サヨナラ" : "");
+      return `<li class="${g.won ? "win" : "lose"}"><span class="mark">${g.won ? "○" : "●"}</span>${esc(g.stage)} <b>${g.kibenRuns}-${g.oppRuns}</b> ${esc(g.opponent)}${extra ? `<small>(${extra.trim()})</small>` : ""}</li>`;
+    }).join("");
+    const last = games[games.length - 1];
+    const champ = last.won && games.length === K.TOURNAMENT.length;
+    $("tournament").innerHTML = `<h3 class="t-title">姫辯学園 夏の戦い</h3><ol class="t-list">${rows}</ol>` +
+      (champ ? '<p class="champ">🏆 姫辯学園琴丘、甲子園初優勝! 甲子園に校歌が響く——「我ら我ら琴丘 われらが学園」</p>'
+             : `<p class="t-end">夏は${esc(last.stage)}で幕を閉じた。</p>`) +
+      '<p class="t-note">▼ 最後の試合の記事</p>';
+    showGame(last);
+  });
+})();
+</script>
+</body>
+</html>
