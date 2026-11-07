@@ -214,8 +214,18 @@ function xMessage(r) {
   return build(headline);
 }
 
+// X への投稿を無料で行うため、文章入りの投稿画面を開くリンクを Discord に送る(タップして投稿ボタンを押すだけ)。
+// X API での完全自動投稿は有料(投稿ごとに課金)なので、X用のキーを登録したときだけ使う。
+function xIntentMessage(r) {
+  const url = "https://x.com/intent/post?text=" + encodeURIComponent(xMessage(r));
+  return `📲 [Xにこの結果を投稿する(タップすると文章入りの投稿画面が開きます)](<${url}>)`;
+}
+
 async function postAll(r) {
-  if (toDiscord) await post(discordMessage(r));
+  if (toDiscord) {
+    await post(discordMessage(r));
+    await post(xIntentMessage(r));
+  }
   if (toX) await postX(xMessage(r));
 }
 
@@ -232,6 +242,7 @@ if (dryRun) {
   console.log(message);
   const xm = xMessage(record);
   console.log(`\n---- X 用(${xLength(xm)}/280)----\n${xm}`);
+  console.log(`\n---- Discord に送るXリンク(${xIntentMessage(record).length}/2000字)----`);
   process.exit(0);
 }
 
