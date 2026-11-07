@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>医療系の学生さんへ | asaken（浅野 剣市）</title>
+  <meta name="description" content="理学療法学科を卒業できず、遠回りして臨床工学技士になった浅野 剣市から、つまずいている医療系の学生さんへのメッセージです。">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="https://kendoyasa-tech.github.io/portfolio/message.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='38' font-weight='bold' fill='white'>A</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="header">
+    <nav>
+      <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">asaken</a></div>
+      <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home">HOME</a></li>
+        <li><a href="index.html#about">自己紹介</a></li>
+        <li><a href="index.html#works">制作実績</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section gray message-page">
+    <div class="container">
+      <div class="message-card">
+        <p class="message-label">MESSAGE</p>
+        <h2 class="message-title"><span class="nobreak">医療系の学生さんへ、</span><span class="nobreak">夢をあきらめないでほしい</span></h2>
+        <div class="message-body">
+          <p>私は理学療法学科を卒業できませんでした。同期の多くが先に進んでいくなかで、自分だけが取り残されたように感じていた時期があります。</p>
+          <p>そこから進路を選び直し、編入して大学を卒業。29歳で臨床工学技士の免許を取り、今は透析の現場で働いています。</p>
+          <p>学校でつまずくと、「自分には向いていなかった」「時間もお金も無駄にした」と、自分を責めてしまいがちです。でも、うまくいかなかったのは、あなたひとりのせいだとは限りません。</p>
+          <p>遠回りに見える道でも、そこで身につけたことは必ずどこかで生きてきます。医療の道は一つではありません。形を変えてでも、夢を手放さずにいてほしいと思います。</p>
+        </div>
+        <p class="message-closing">もし今、ひとりで悩んでいる人がいたら、話を聞くことくらいはできます。お気軽にご連絡ください。</p>
+      </div>
+      <p class="message-back"><a href="index.html">&larr; トップページへ戻る</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 asaken（浅野 剣市）. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

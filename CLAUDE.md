@@ -13,6 +13,7 @@ Web 制作の営業用ポートフォリオサイト。素の HTML / CSS / JavaS
 | --- | --- |
 | `index.html` | 全セクション（HOME / ABOUT / 医療機関の方へ / SKILL / SERVICE / WORKS / FLOW / CONTACT）を1ファイルに収めたメインページ |
 | `style.css` | 全スタイル。レスポンシブはメディアクエリで対応 |
+| `message.html` | 医療系の学生さんへのメッセージページ。トップの ABOUT 末尾からリンク。「3年留年」という表現は使わない |
 | `works/` | 制作実績のスクリーンショット（`work-<案件名>.jpg`） |
 | `works/dental/` | 実績として公開している架空の歯科医院サイト（`index.html` / `style.css`）。本体とは独立したCSSで、医療系の制作物として実物を閲覧できるようにしている |
 | `service/` | サービス欄のイメージ画像（`svc-<サービス名>.jpg`）。実績欄と絵が被らないページを選ぶ |
