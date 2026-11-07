@@ -1,5 +1,5 @@
 # 姫辯学園琴丘 毎朝の自動試合
-# 毎朝6時(日本時間)ごろに1試合進め、結果をDiscordの #姫辯スポーツ に投稿し、
+# 毎朝6時(日本時間)ごろに1試合進め、結果をDiscordの #姫辯スポーツ とXに投稿し、
 # works/kiben/data/season.json を更新してポートフォリオに反映する。
 # GitHub の定時実行は混雑で遅れることがあるため、5時45分に起動するようにしている。
 
@@ -11,9 +11,14 @@ on:
   workflow_dispatch:         # Actions タブから手動でも実行できる
     inputs:
       repost:
-        description: "試合をせず、最新の試合をDiscordに投稿し直す(投稿テスト用)"
+        description: "試合をせず、最新の試合を投稿し直す(投稿テスト用)"
         type: boolean
         default: false
+      target:
+        description: "投稿し直す先(投稿し直すときだけ使う)"
+        type: choice
+        options: [両方, Discordだけ, Xだけ]
+        default: 両方
 
 permissions:
   contents: write
@@ -32,10 +37,18 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 試合をして Discord に投稿
+      - name: 試合をして Discord と X に投稿
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: node scripts/kiben-daily.mjs ${{ inputs.repost && '--repost' || '' }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: >-
+          node scripts/kiben-daily.mjs
+          ${{ inputs.repost && '--repost' || '' }}
+          ${{ inputs.repost && inputs.target == 'Discordだけ' && '--discord-only' || '' }}
+          ${{ inputs.repost && inputs.target == 'Xだけ' && '--x-only' || '' }}
 
       - name: 結果を保存
         run: |
