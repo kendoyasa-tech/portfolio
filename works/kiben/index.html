@@ -58,6 +58,14 @@
     <div class="scoreboard-wrap"><table class="scoreboard" id="scoreboard"></table></div>
     <div class="paper-body" id="body"></div>
     <ul class="paper-comments" id="comments"></ul>
+    <div class="win-song" id="winSong" hidden>
+      <p id="winSongText">甲子園に姫辯の校歌が流れる——</p>
+      <button class="song-btn" type="button" data-song aria-pressed="false">
+        <span class="song-icon" aria-hidden="true"></span>
+        <span class="song-label">校歌を流す</span>
+        <span class="song-time" aria-hidden="true">1:07</span>
+      </button>
+    </div>
   </section>
 
   <section class="panel" aria-labelledby="team-title">
@@ -71,14 +79,21 @@
     <ul class="bench" id="bench"></ul>
   </section>
 
-  <section class="panel kouka" aria-labelledby="kouka-title">
+  <section class="panel kouka" id="kouka" aria-labelledby="kouka-title">
     <h2 id="kouka-title">校歌(1番)</h2>
-    <p>書写の御山(みやま)に 陽は映えて<br>
+    <button class="song-btn" type="button" data-song aria-pressed="false">
+      <span class="song-icon" aria-hidden="true"></span>
+      <span class="song-label">校歌を流す</span>
+      <span class="song-time" aria-hidden="true">1:07</span>
+    </button>
+    <div class="song-bar" aria-hidden="true"><span id="songProgress"></span></div>
+    <p class="lyrics">書写の御山(みやま)に 陽は映えて<br>
       桔梗輝く 白鷺(はくろ)の麓<br>
       琴の音(ね)ひびく 丘の上<br>
       尊女の遺志(みおやのみぶね) 受け継ぎて<br>
       集える我ら 意気高し<br>
       我ら我ら琴丘 われらが学園</p>
+    <audio id="song" src="kouka.m4a" preload="none" playsinline></audio>
   </section>
 
   <section class="panel about" aria-labelledby="about-title">
@@ -138,6 +153,8 @@
     $("comments").innerHTML = a.comments.map(c => `<li>${esc(c)}</li>`).join("");
     $("result").hidden = false;
     $("result").classList.toggle("is-win", g.won);
+    $("winSong").hidden = !g.won;
+    $("winSongText").textContent = `${g.stadium.replace("阪神甲子園球場", "甲子園")}に姫辯の校歌が流れる——`;
     $("result").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -159,6 +176,40 @@
              : `<p class="t-end">夏は${esc(last.stage)}で幕を閉じた。</p>`) +
       '<p class="t-note">▼ 最後の試合の記事</p>';
     showGame(last);
+  });
+
+  // ---- 校歌の再生(どのボタンからでも同じ音源を流す/止める) ----
+  const song = $("song");
+  const songBtns = document.querySelectorAll("[data-song]");
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+
+  function syncButtons() {
+    const playing = !song.paused && !song.ended;
+    songBtns.forEach(b => {
+      b.setAttribute("aria-pressed", String(playing));
+      b.classList.toggle("is-playing", playing);
+      b.querySelector(".song-label").textContent = playing ? "校歌を止める" : "校歌を流す";
+    });
+  }
+
+  songBtns.forEach(b => b.addEventListener("click", () => {
+    if (song.paused || song.ended) {
+      if (song.ended) song.currentTime = 0;
+      const p = song.play();
+      if (p && p.catch) p.catch(() => syncButtons());
+    } else {
+      song.pause();
+    }
+  }));
+
+  song.addEventListener("play", syncButtons);
+  song.addEventListener("pause", syncButtons);
+  song.addEventListener("ended", () => { song.currentTime = 0; syncButtons(); });
+  song.addEventListener("timeupdate", () => {
+    const d = song.duration || 67;
+    $("songProgress").style.width = `${(song.currentTime / d) * 100}%`;
+    const left = fmt(Math.max(0, d - song.currentTime));
+    songBtns.forEach(b => { b.querySelector(".song-time").textContent = song.paused ? fmt(d) : left; });
   });
 })();
 </script>
