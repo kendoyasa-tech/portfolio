@@ -313,6 +313,41 @@
 
         <div class="work-card">
           <div class="work-img">
+            <img src="works/work-kouka.jpg" alt="架空の高校「姫辯学園琴丘高校」の校章（紫の桔梗と白鷺）">
+          </div>
+          <div class="work-info">
+            <span class="work-tag">自主制作 / 作詞・AI作曲</span>
+            <h3>架空の高校の校歌</h3>
+            <p class="work-meta">作詞 / AI作曲 / 校章デザイン</p>
+            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-kouka">詳細を見る</button>
+            <dl class="work-detail" id="detail-kouka" hidden>
+              <dt>完成した動画</dt>
+              <dd>
+                <video class="work-video" src="works/kouka.mp4" poster="works/kouka-poster.jpg" controls playsinline preload="none" aria-label="姫辯学園琴丘高校 校歌（約67秒）"></video>
+              </dd>
+              <dt>制作の目的</dt>
+              <dd>高校野球が好きなので、自主制作として架空の高校「姫辯学園琴丘高校」を設定し、校歌を作りました。甲子園で流れる校歌をイメージして、作詞と校章のデザイン、作曲AIでの音源づくりを行い、歌詞テロップ付きの縦型動画にまとめました。学校名・設定はすべて架空のもので、実在の学校とは関係ありません。</dd>
+              <dt>歌詞（1番）</dt>
+              <dd>書写の御山（みやま）に　陽は映えて<br>
+                桔梗輝く　白鷺（はくろ）の麓<br>
+                琴の音（ね）ひびく　丘の上<br>
+                尊女の遺志（みおやのみぶね）　受け継ぎて<br>
+                集える我ら　意気高し<br>
+                我ら我ら琴丘　われらが学園</dd>
+              <dt>担当範囲</dt>
+              <dd>学校の設定づくり / 作詞 / 作曲AI・画像生成AIへの指示文の作成 / 歌詞テロップ付き縦型動画の制作</dd>
+              <dt>課題と工夫した点</dt>
+              <dd>地元・姫路の書写山や白鷺城、母校の校訓の要素を歌詞に取り入れました。作曲AIが歌詞を勝手に変えたり崩したりしたため、歌詞をひらがなにして1行ずつ区切るなど、指示文の書き方を何度も改善しています。</dd>
+              <dt>使用ツール</dt>
+              <dd>Gemini（作曲・校章の画像生成） / Claude Code（動画の書き出し・サイト掲載）</dd>
+              <dt>野球部の試合シミュレーター</dt>
+              <dd>同じ設定で、野球部の試合をシミュレーションして新聞記事風の戦評を自動で書くページも作りました（JavaScript。Python 版は Discord ボットとして動かしています）。<br><a href="works/kiben/index.html">試合シミュレーターを開く</a></dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-img">
             <img src="works/work-ninjacode.jpg" alt="プログラミングスクール NINJA CODE Web制作&デザインコースページ">
           </div>
           <div class="work-info">
@@ -433,41 +468,6 @@
               <dd>ご高齢の方にも使っていただけるよう、新しいアプリを入れてもらうのではなく、普段お使いのLINE上で完結する形にしました。記録はメッセージを1通送るだけにして、操作の手間を最小限にしています。</dd>
               <dt>使用技術</dt>
               <dd>Node.js / LINE Messaging API</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="work-card">
-          <div class="work-img">
-            <img src="works/work-kouka.jpg" alt="架空の高校「姫辯学園琴丘高校」の校章（紫の桔梗と白鷺）">
-          </div>
-          <div class="work-info">
-            <span class="work-tag">自主制作 / 作詞・AI作曲</span>
-            <h3>架空の高校の校歌</h3>
-            <p class="work-meta">作詞 / AI作曲 / 校章デザイン</p>
-            <button class="work-toggle" type="button" aria-expanded="false" aria-controls="detail-kouka">詳細を見る</button>
-            <dl class="work-detail" id="detail-kouka" hidden>
-              <dt>完成した動画</dt>
-              <dd>
-                <video class="work-video" src="works/kouka.mp4" poster="works/kouka-poster.jpg" controls playsinline preload="none" aria-label="姫辯学園琴丘高校 校歌（約67秒）"></video>
-              </dd>
-              <dt>制作の目的</dt>
-              <dd>高校野球が好きなので、自主制作として架空の高校「姫辯学園琴丘高校」を設定し、校歌を作りました。甲子園で流れる校歌をイメージして、作詞と校章のデザイン、作曲AIでの音源づくりを行い、歌詞テロップ付きの縦型動画にまとめました。学校名・設定はすべて架空のもので、実在の学校とは関係ありません。</dd>
-              <dt>歌詞（1番）</dt>
-              <dd>書写の御山（みやま）に　陽は映えて<br>
-                桔梗輝く　白鷺（はくろ）の麓<br>
-                琴の音（ね）ひびく　丘の上<br>
-                尊女の遺志（みおやのみぶね）　受け継ぎて<br>
-                集える我ら　意気高し<br>
-                我ら我ら琴丘　われらが学園</dd>
-              <dt>担当範囲</dt>
-              <dd>学校の設定づくり / 作詞 / 作曲AI・画像生成AIへの指示文の作成 / 歌詞テロップ付き縦型動画の制作</dd>
-              <dt>課題と工夫した点</dt>
-              <dd>地元・姫路の書写山や白鷺城、母校の校訓の要素を歌詞に取り入れました。作曲AIが歌詞を勝手に変えたり崩したりしたため、歌詞をひらがなにして1行ずつ区切るなど、指示文の書き方を何度も改善しています。</dd>
-              <dt>使用ツール</dt>
-              <dd>Gemini（作曲・校章の画像生成） / Claude Code（動画の書き出し・サイト掲載）</dd>
-              <dt>野球部の試合シミュレーター</dt>
-              <dd>同じ設定で、野球部の試合をシミュレーションして新聞記事風の戦評を自動で書くページも作りました（JavaScript。Python 版は Discord ボットとして動かしています）。<br><a href="works/kiben/index.html">試合シミュレーターを開く</a></dd>
             </dl>
           </div>
         </div>
