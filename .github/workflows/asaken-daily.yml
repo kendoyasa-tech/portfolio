@@ -15,6 +15,10 @@ on:
         description: "morning(朝)か noon(昼)"
         required: false
         default: ""
+      check_x:
+        description: "Xのキーの確認だけする(投稿しない)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -58,4 +62,4 @@ jobs:
           ASAKEN_X_API_SECRET: ${{ secrets.ASAKEN_X_API_SECRET }}
           ASAKEN_X_ACCESS_TOKEN: ${{ secrets.ASAKEN_X_ACCESS_TOKEN }}
           ASAKEN_X_ACCESS_TOKEN_SECRET: ${{ secrets.ASAKEN_X_ACCESS_TOKEN_SECRET }}
-        run: node scripts/asaken-daily.mjs
+        run: node scripts/asaken-daily.mjs ${{ inputs.check_x && '--check-x' || '' }}

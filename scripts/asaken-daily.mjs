@@ -88,6 +88,20 @@ const xKeys = {
 };
 const xReady = Object.values(xKeys).every(Boolean);
 
+// 診断用:キーの中身は出さず、長さと形だけ表示して /2/users/me で認証を確かめる
+if (process.argv.includes("--check-x")) {
+  for (const [k, v] of Object.entries(xKeys)) {
+    const t = v || "";
+    console.log(`${k}: 長さ${t.length} 前後の空白${t !== t.trim() ? "あり" : "なし"} ハイフン${t.includes("-") ? "あり" : "なし"} 先頭が数字${/^\d/.test(t) ? "はい" : "いいえ"}`);
+  }
+  if (xReady) {
+    const url = "https://api.x.com/2/users/me";
+    const res = await fetch(url, { headers: { Authorization: oauthHeader("GET", url, xKeys) } });
+    console.log(`users/me: ${res.status} ${(await res.text()).replace(/\s+/g, " ").slice(0, 200)}`);
+  }
+  process.exit(0);
+}
+
 async function postX() {
   const url = "https://api.x.com/2/tweets";
   try {
