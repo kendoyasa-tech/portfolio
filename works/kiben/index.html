@@ -47,9 +47,9 @@
 <main>
   <section class="paper daily" id="daily" aria-labelledby="daily-title">
     <p class="paper-name"><span id="daily-title">姫辯スポーツ 朝刊</span><span class="daily-badge">毎朝6時 自動更新</span></p>
-    <p class="daily-lead">毎朝6時に1試合ずつ夏の大会が自動で進みます。結果はこの欄と、Discordの「#姫辯スポーツ」チャンネル、Xの<a href="https://x.com/kibenbb" target="_blank" rel="noopener">@kibenbb</a>に届きます。負けたら翌朝から新しい挑戦です。試合のダイジェスト動画なども随時追加していきます。</p>
+    <p class="daily-lead">毎朝6時に1試合ずつ夏の大会が自動で進みます。結果はこの欄と、Discordの「#姫辯スポーツ」チャンネル、Xの<a href="https://x.com/kibenbb" target="_blank" rel="noopener">@kibenbb</a>に届きます。兵庫大会1回戦から甲子園出場、そして全国制覇までの物語が毎朝1試合ずつ進み、優勝したら翌年の夏が始まります。試合のダイジェスト動画なども随時追加していきます。</p>
     <div class="daily-stats" id="dailyStats"></div>
-    <ol class="daily-road" id="dailyRoad" aria-label="今の挑戦の勝ち上がり"></ol>
+    <ol class="daily-road" id="dailyRoad" aria-label="今大会の勝ち上がり"></ol>
     <div id="dailyArticle" hidden>
       <p class="daily-date" id="dailyDate"></p>
       <h2 class="paper-headline" id="dailyHeadline"></h2>
@@ -58,7 +58,7 @@
       <div class="paper-body" id="dailyBody"></div>
       <ul class="paper-comments" id="dailyComments"></ul>
     </div>
-    <p class="daily-empty" id="dailyEmpty" hidden>第1試合は、明日の朝6時に行われます。</p>
+    <p class="daily-empty" id="dailyEmpty" hidden>第百八回大会の兵庫大会1回戦は、明日の朝に行われます。</p>
     <details class="daily-history" id="dailyHistoryWrap" hidden>
       <summary>これまでの試合</summary>
       <ol class="t-list" id="dailyHistory"></ol>
@@ -226,7 +226,7 @@
     const last = games[games.length - 1];
     const wins = games.filter(g => g.won).length;
     $("dailyStats").innerHTML =
-      `<span><b>${data.challenge}</b>回目の挑戦</span>` +
+      `<span>第<b>${K.num(107 + data.challenge)}</b>回大会</span>` +
       `<span>通算 <b>${wins}</b>勝<b>${games.length - wins}</b>敗</span>` +
       `<span>優勝 <b>${data.titles || 0}</b>回</span>`;
 
@@ -236,12 +236,12 @@
       const g = cur.find(x => x.round === i);
       const cls = g ? (g.won ? "win" : "lose") : (i === (last.won ? last.round + 1 : -1) ? "next" : "");
       const mark = g ? (g.won ? "○" : "●") : (cls === "next" ? "次" : "");
-      const stage = K.OPPONENTS[opp][2].replace("兵庫大会 ", "兵庫").replace("甲子園 ", "");
+      const stage = K.OPPONENTS[opp][2].replace("兵庫大会 ", "兵庫").replace("甲子園 ", "甲子園");
       return `<li class="${cls}"><span class="road-mark">${mark}</span><span class="road-stage">${esc(stage)}</span><span class="road-opp">${esc(K.SHORT_NAMES[opp] || opp)}</span></li>`;
     }).join("");
 
     // 最新の記事
-    $("dailyDate").textContent = `${last.date.replace(/-/g, "/")} 朝刊 ・ ${last.challenge}回目の挑戦`;
+    $("dailyDate").textContent = `${last.date.replace(/-/g, "/")} 朝刊 ・ 第${K.num(107 + last.challenge)}回大会`;
     $("dailyHeadline").textContent = last.headline;
     $("dailyStage").textContent = `【${last.stage}】${last.stadium}`;
     $("dailyScoreboard").innerHTML = scoreboard(last);

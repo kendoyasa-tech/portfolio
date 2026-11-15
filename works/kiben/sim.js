@@ -34,6 +34,11 @@
 
   // 相手校: [打力, 投手力, 舞台, 球場]
   const OPPONENTS = {
+    "姫路工": [58, 60, "兵庫大会 1回戦", "ほっともっとフィールド神戸"],
+    "市尼崎": [62, 64, "兵庫大会 2回戦", "ほっともっとフィールド神戸"],
+    "明石商": [70, 72, "兵庫大会 3回戦", "明石トーカロ球場"],
+    "東洋大姫路": [72, 74, "兵庫大会 4回戦", "ウイング姫路球場"],
+    "社": [68, 70, "兵庫大会 準々決勝", "ほっともっとフィールド神戸"],
     "報徳学園": [74, 76, "兵庫大会 準決勝", "ウイング姫路球場"],
     "神戸国際大付": [78, 80, "兵庫大会 決勝", "ウイング姫路球場"],
     "北海": [68, 70, "甲子園 1回戦", "阪神甲子園球場"],
@@ -50,6 +55,8 @@
   function num(n) {
     if (n < 10) return KANSUJI[n];
     if (n < 20) return "十" + (n > 10 ? KANSUJI[n - 10] : "");
+    if (n < 100) return (n >= 20 ? KANSUJI[Math.floor(n / 10)] : "") + "十" + (n % 10 ? KANSUJI[n % 10] : "");
+    if (n < 1000) return (n >= 200 ? KANSUJI[Math.floor(n / 100)] : "") + "百" + (n % 100 ? num(n % 100) : "");
     return String(n);
   }
 
@@ -262,7 +269,7 @@
     const inn = g.innings >= 10 ? `延長${num(g.innings)}回の末、` : "";
     let end = "敗れ、夏を終えた。";
     if (g.won) end = g.stage === "甲子園 決勝" ? "勝ち、悲願の全国制覇を成し遂げた。" : g.stage === "兵庫大会 決勝" ? "勝ち、甲子園への切符をつかんだ。" : "勝ち、次戦へ駒を進めた。";
-    paras.push(`第百八回全国高校野球選手権${g.stage.startsWith("兵庫") ? "兵庫大会" : "大会"}は、${g.stadium}で${g.stage.split(" ")[1]}が行われ、${TEAM}(兵庫)は${g.opponent}と対戦。${inn}${num(g.kibenRuns)}―${num(g.oppRuns)}で${end}`);
+    paras.push(`第${num(g.edition || 108)}回全国高校野球選手権${g.stage.startsWith("兵庫") ? "兵庫大会" : "大会"}は、${g.stadium}で${g.stage.split(" ")[1]}が行われ、${TEAM}(兵庫)は${g.opponent}と対戦。${inn}${num(g.kibenRuns)}―${num(g.oppRuns)}で${end}`);
 
     const kh = g.highlights.filter(h => h[1] === "kiben");
     const oh = g.highlights.filter(h => h[1] === "opp");
@@ -300,5 +307,5 @@
     return { headline: headline(g), paras, comments: [`${MANAGER}監督「${mgr}」`, `${CAPTAIN}主将「${cap}」`] };
   }
 
-  global.Kiben = { TEAM, MANAGER, CAPTAIN, LINEUP, BENCH, OPPONENTS, TOURNAMENT, SHORT_NAMES, playGame, playTournament, article, short };
+  global.Kiben = { num, TEAM, MANAGER, CAPTAIN, LINEUP, BENCH, OPPONENTS, TOURNAMENT, SHORT_NAMES, playGame, playTournament, article, short };
 })(typeof window !== "undefined" ? window : globalThis);

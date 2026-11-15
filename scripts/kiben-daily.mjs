@@ -1,6 +1,6 @@
 // 姫辯学園琴丘 毎朝の自動試合
 // 1日1試合ずつ夏の大会を進め、結果を works/kiben/data/season.json に保存して Discord と X に投稿する。
-// 負けた翌日、または優勝した翌日からは新しい大会(第N回目の挑戦)が始まる。
+// 物語は兵庫大会1回戦 → 甲子園出場 → 甲子園優勝まで(姫辯は必ず勝つ)。優勝した翌日からは翌年の夏(第N回大会)が始まる。
 //
 // 使い方:
 //   node scripts/kiben-daily.mjs            … 試合をして保存し、DISCORD_WEBHOOK_URL があれば Discord、
@@ -65,7 +65,8 @@ if (!last || !last.won || last.round === K.TOURNAMENT.length - 1) {
 }
 
 const opponent = K.TOURNAMENT[state.round];
-const g = K.playGame(opponent, false);
+const g = K.playGame(opponent, true); // 物語なので姫辯は必ず勝つ(スコアや展開は毎回変わる)
+g.edition = 107 + state.challenge; // 1年目=第108回
 const a = K.article(g);
 const champion = g.won && state.round === K.TOURNAMENT.length - 1;
 
@@ -111,14 +112,14 @@ function boardText(r) {
 function discordMessage(r) {
   const mark = r.won ? "○" : "●";
   const parts = [
-    `📰 **姫辯スポーツ** ${r.date.replace(/-/g, "/")}朝刊 ── 挑戦${r.challenge}回目・${r.stage}`,
+    `📰 **姫辯スポーツ** ${r.date.replace(/-/g, "/")}朝刊 ── 第${K.num(107 + r.challenge)}回大会・${r.stage}`,
     `## ${r.headline}`,
     `${mark} 姫辯学園琴丘 **${r.kibenRuns} - ${r.oppRuns}** ${r.opponent}(${r.stadium}${r.innings >= 10 ? `・延長${r.innings}回` : ""})`,
     "```\n" + boardText(r) + "\n```",
     ...r.paras,
     r.comments.map(c => `> ${c}`).join("\n"),
   ];
-  if (r.champion) parts.push("🏆 **姫辯学園琴丘、甲子園初優勝!** 甲子園に校歌が響く——");
+  if (r.champion) parts.push(`🏆 **姫辯学園琴丘、甲子園${state.titles + 1 === 1 ? "初" : `${state.titles + 1}度目の`}優勝!** 甲子園に校歌が響く——明日の朝からは翌年の夏が始まります。`);
   else if (!r.won) parts.push(`夏は${r.stage}で幕。明日の朝から新しい挑戦が始まります。`);
   else parts.push(`▶ 次戦は明日の朝6時:${K.OPPONENTS[K.TOURNAMENT[r.round + 1]][2]} vs ${K.TOURNAMENT[r.round + 1]}`);
   parts.push(`過去の試合: <${PAGE_URL}#daily>`);
@@ -196,7 +197,7 @@ function xMessage(r) {
   const mark = r.won ? "○" : "●";
   const extra = (r.innings >= 10 ? `延長${r.innings}回` : "") + (r.walkoff ? "サヨナラ" : "");
   let next;
-  if (r.champion) next = "🏆 姫辯学園琴丘、甲子園初優勝!甲子園に校歌が響く——";
+  if (r.champion) next = `🏆 姫辯学園琴丘、甲子園${state.titles + 1 === 1 ? "初" : `${state.titles + 1}度目の`}優勝!甲子園に校歌が響く——`;
   else if (!r.won) next = `夏は${r.stage}で幕。明朝から新しい挑戦へ。`;
   else next = `▶ 次戦 明朝6時 vs ${K.TOURNAMENT[r.round + 1]}`;
   const tail = ["#甲子園 #高校野球 #姫辯学園", PAGE_URL + "#daily"].join("\n");
