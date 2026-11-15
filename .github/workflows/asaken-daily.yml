@@ -54,4 +54,8 @@ jobs:
         env:
           ASAKEN_DISCORD_WEBHOOK_URL: ${{ secrets.ASAKEN_DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK_URL }}
           SLOT: ${{ inputs.slot }}
+          ASAKEN_X_API_KEY: ${{ secrets.ASAKEN_X_API_KEY }}
+          ASAKEN_X_API_SECRET: ${{ secrets.ASAKEN_X_API_SECRET }}
+          ASAKEN_X_ACCESS_TOKEN: ${{ secrets.ASAKEN_X_ACCESS_TOKEN }}
+          ASAKEN_X_ACCESS_TOKEN_SECRET: ${{ secrets.ASAKEN_X_ACCESS_TOKEN_SECRET }}
         run: node scripts/asaken-daily.mjs

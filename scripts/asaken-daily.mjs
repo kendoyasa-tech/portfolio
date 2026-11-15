@@ -60,14 +60,73 @@ if (process.argv.includes("--all")) {
 }
 
 const text = todaysPost();
+// X に自動で出す文章は URL なし(URL付きは X API の料金が約13倍のため)。サイトはプロフィール欄に置く
+const xText = text.replace(`\n${SITE}`, "");
+
+// ---- X への自動投稿(ASAKEN_X_* の4つが登録されているときだけ) ----
+import { createHmac, randomBytes } from "node:crypto";
+const pct = s => encodeURIComponent(s).replace(/[!'()*]/g, c => "%" + c.charCodeAt(0).toString(16).toUpperCase());
+function oauthHeader(method, url, k) {
+  const params = {
+    oauth_consumer_key: k.apiKey,
+    oauth_nonce: randomBytes(16).toString("hex"),
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: Math.floor(Date.now() / 1000).toString(),
+    oauth_token: k.accessToken,
+    oauth_version: "1.0",
+  };
+  const paramStr = Object.keys(params).sort().map(x => `${pct(x)}=${pct(params[x])}`).join("&");
+  const base = [method, pct(url), pct(paramStr)].join("&");
+  params.oauth_signature = createHmac("sha1", `${pct(k.apiSecret)}&${pct(k.accessSecret)}`).update(base).digest("base64");
+  return "OAuth " + Object.keys(params).sort().map(x => `${pct(x)}="${pct(params[x])}"`).join(", ");
+}
+const xKeys = {
+  apiKey: process.env.ASAKEN_X_API_KEY,
+  apiSecret: process.env.ASAKEN_X_API_SECRET,
+  accessToken: process.env.ASAKEN_X_ACCESS_TOKEN,
+  accessSecret: process.env.ASAKEN_X_ACCESS_TOKEN_SECRET,
+};
+const xReady = Object.values(xKeys).every(Boolean);
+
+async function postX() {
+  const url = "https://api.x.com/2/tweets";
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { Authorization: oauthHeader("POST", url, xKeys), "Content-Type": "application/json" },
+      body: JSON.stringify({ text: xText }),
+    });
+    if (!res.ok) return { ok: false, err: `${res.status} ${(await res.text()).slice(0, 300)}` };
+    const json = await res.json();
+    return { ok: true, link: `https://x.com/i/web/status/${json.data?.id}` };
+  } catch (e) {
+    return { ok: false, err: e.message };
+  }
+}
+
 const intent = "https://x.com/intent/post?text=" + encodeURIComponent(text);
-const message = `📣 **今日のasaken投稿**\n\n${text.replace(SITE, `<${SITE}>`)}\n\n📲 [Xに投稿する(タップすると文章入りの投稿画面が開きます)](<${intent}>)`;
+const tapLine = `📲 [Xに投稿する(タップすると文章入りの投稿画面が開きます)](<${intent}>)`;
+let xLine = tapLine;
 
 if (process.argv.includes("--dry-run")) {
-  console.log(message);
-  console.log(`\n(Xの文字数 ${xLength(text)}/280、Discordの文字数 ${message.length}/2000)`);
+  console.log(`📣 **今日のasaken投稿**\n\n${text}\n\n(X自動投稿: ${xReady ? "あり" : "なし"})\n--- Xに出す文 ---\n${xText}`);
+  console.log(`\n(Xの文字数 ${xLength(xText)}/280)`);
   process.exit(0);
 }
+
+if (xReady) {
+  const r = await postX();
+  if (r.ok) {
+    console.log(`X に投稿しました: ${r.link}`);
+    xLine = `✅ Xに自動で投稿しました → <${r.link}>`;
+  } else {
+    console.log(`::warning::X への投稿に失敗しました: ${r.err}`);
+    xLine = `⚠️ Xへの自動投稿に失敗しました(${r.err.slice(0, 120)})。今日はこちらから手動でどうぞ\n${tapLine}`;
+  }
+} else {
+  console.log("X用のキー(ASAKEN_X_* の4つ)が未登録のため、X への自動投稿は省略しました。");
+}
+const message = `📣 **今日のasaken投稿**\n\n${text.replace(SITE, `<${SITE}>`)}\n\n${xLine}`;
 
 const hook = process.env.ASAKEN_DISCORD_WEBHOOK_URL;
 if (!hook) {
