@@ -59,23 +59,42 @@ if (process.argv.includes("--all")) {
   process.exit(0);
 }
 
-// 姫辯の今日の試合結果(毎朝 works/kiben/data/season.json に保存される)を1行添える
-function kibenLine() {
+// 姫辯の今日の試合結果(毎朝 works/kiben/data/season.json に保存される)を添える
+function kibenGame() {
   try {
     const d = JSON.parse(readFileSync(new URL("../works/kiben/data/season.json", import.meta.url), "utf8"));
     const g = (d.games || [])[d.games.length - 1];
     const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
-    if (!g || g.date !== today) return "";
-    const extra = (g.innings >= 10 ? `延長${g.innings}回` : "") + (g.walkoff ? "サヨナラ" : "");
-    return `⚾今日の姫辯学園【${g.stage}】${g.won ? "○" : "●"}${g.kibenRuns}-${g.oppRuns} ${g.opponent}${extra ? `(${extra})` : ""}${g.champion ? " 🏆甲子園優勝!" : ""}`;
+    return g && g.date === today ? g : null;
   } catch {
-    return "";
+    return null;
   }
 }
-const kiben = kibenLine();
+const kg = kibenGame();
+function kibenBlock(g, { comment = true } = {}) {
+  if (!g) return "";
+  const extra = (g.innings >= 10 ? `延長${g.innings}回` : "") + (g.walkoff ? "サヨナラ" : "");
+  const lines = [
+    `⚾姫辯学園【${g.stage}】${g.won ? "○" : "●"}${g.kibenRuns}-${g.oppRuns} ${g.opponent}${extra ? `(${extra})` : ""}${g.champion ? " 🏆甲子園優勝!" : ""}`,
+  ];
+  if (g.mvp) lines.push(`殊勲:${g.mvp}`);
+  if (comment && g.comments?.[0]) lines.push(g.comments[0].replace(/^(\S+) (\S+)監督/, "$1監督"));
+  return lines.join("\n");
+}
+const kiben = kibenBlock(kg);
 const text = todaysPost();
 // X に自動で出す文章は URL なし(URL付きは X API の料金が約13倍のため)。サイトはプロフィール欄に置く
-const xText = text.replace(`\n${SITE}`, "") + (kiben ? `\n\n${kiben}` : "");
+// 280 を超えるときは、ハッシュタグを1つに → ハッシュタグなし → 監督の言葉なし、の順に削って収める
+const body = text.replace(`\n${SITE}`, "");
+const oneTag = body.replace(TAGS, "#姫辯学園");
+const noTag = body.replace(`\n\n${TAGS}`, "");
+const candidates = [
+  body + (kiben ? `\n\n${kiben}` : ""),
+  oneTag + (kiben ? `\n\n${kiben}` : ""),
+  noTag + (kiben ? `\n\n${kiben}` : ""),
+  noTag + (kg ? `\n\n${kibenBlock(kg, { comment: false })}` : ""),
+];
+const xText = candidates.find(t => xLength(t) <= 280) || candidates[candidates.length - 1];
 
 // ---- X への自動投稿(ASAKEN_X_* の4つが登録されているときだけ) ----
 import { createHmac, randomBytes } from "node:crypto";
