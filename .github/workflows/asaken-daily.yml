@@ -1,15 +1,19 @@
 # asaken(@ninjacode482651)用 毎日のサービス紹介
-# 毎日夕方(日本時間)ごろ、ポートフォリオのサービス紹介文を1つ選んで Discord に送る。
+# 毎日 朝6時ごろ・昼11時ごろ(日本時間)の2回、ポートフォリオのサービス紹介文を1つ選んで Discord に送る。
 # Discord には「Xに投稿する」リンクも付くので、タップして投稿する(X API は有料のため使わない)。
-# GitHub の定時実行は混雑で6〜10時間遅れることがあったため、11時13分に起動して夕方ごろ届くようにしている。
+# GitHub の定時実行は6〜10時間遅れることがあったため使わず、Claude の定期タスクが
+# 決まった時刻にこのワークフローを起動する(slot に morning / noon を渡す)。
 # 専用の送り先(ASAKEN_DISCORD_WEBHOOK_URL)が未登録なら、姫辯と同じ送り先(DISCORD_WEBHOOK_URL)に送る。
 
 name: asaken 毎日のサービス紹介
 
 on:
-  schedule:
-    - cron: "13 2 * * *"   # UTC 2:13 = 日本時間 11:13
-  workflow_dispatch:       # Actions タブから手動でも実行できる
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "morning(朝)か noon(昼)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -27,4 +31,5 @@ jobs:
       - name: 今日のサービス紹介を Discord に送る
         env:
           ASAKEN_DISCORD_WEBHOOK_URL: ${{ secrets.ASAKEN_DISCORD_WEBHOOK_URL || secrets.DISCORD_WEBHOOK_URL }}
+          SLOT: ${{ inputs.slot }}
         run: node scripts/asaken-daily.mjs

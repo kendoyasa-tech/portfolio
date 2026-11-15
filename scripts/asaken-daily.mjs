@@ -63,9 +63,13 @@ function shuffled(n, seed) {
 }
 
 function todaysPost() {
-  const day = Math.floor((Date.now() + 9 * 3600e3) / 86400e3); // 日本時間の通し日数
-  const cycle = Math.floor(day / POSTS.length);
-  return build(POSTS[shuffled(POSTS.length, cycle + 1)[day % POSTS.length]]);
+  const jst = Date.now() + 9 * 3600e3;
+  const day = Math.floor(jst / 86400e3); // 日本時間の通し日数
+  // 1日2回(朝=0、昼=1)。SLOT が指定されていなければ日本時間9時より前を朝とみなす
+  const slot = process.env.SLOT === "noon" ? 1 : process.env.SLOT === "morning" ? 0 : (new Date(jst).getUTCHours() < 9 ? 0 : 1);
+  const n = day * 2 + slot; // 通し番号
+  const cycle = Math.floor(n / POSTS.length);
+  return build(POSTS[shuffled(POSTS.length, cycle + 1)[n % POSTS.length]]);
 }
 
 if (process.argv.includes("--all")) {
