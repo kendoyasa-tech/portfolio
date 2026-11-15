@@ -67,6 +67,7 @@
       <span class="kiben-banner-tag">自主制作</span>
       <span class="kiben-banner-title">姫辯学園琴丘高校 野球部</span>
       <span class="kiben-banner-lead">架空の高校を、校歌・校章・野球部までまるごと制作。毎朝6時に夏の大会が自動で進みます。</span>
+      <span class="kiben-banner-today" id="kibenToday" hidden></span>
     </span>
     <span class="kiben-banner-more">ページを見る <span aria-hidden="true">→</span></span>
   </a>
@@ -734,5 +735,20 @@
     });
   </script>
 
+<script>
+  // 姫辯の最新の朝刊の見出しをバナーに表示(works/kiben/data/season.json は毎朝自動で更新される)
+  fetch("works/kiben/data/season.json?t=" + Date.now(), { cache: "no-store" })
+    .then(r => r.json())
+    .then(d => {
+      const g = (d.games || [])[d.games.length - 1];
+      const el = document.getElementById("kibenToday");
+      if (!el) return;
+      el.textContent = g
+        ? `📰 ${g.date.slice(5).replace("-", "/")}の朝刊【${g.stage}】${g.headline}(${g.kibenRuns}-${g.oppRuns} ${g.opponent})`
+        : "📰 明日の朝、兵庫大会1回戦から新しい夏が始まります";
+      el.hidden = false;
+    })
+    .catch(() => {});
+</script>
 </body>
 </html>

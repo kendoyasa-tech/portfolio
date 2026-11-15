@@ -1024,6 +1024,7 @@ footer {
   letter-spacing: 0.1em;
 }
 .kiben-banner-lead { font-size: 0.9rem; opacity: 0.88; }
+.kiben-banner-today { display: block; margin-top: 0.45rem; padding: 0.35rem 0.6rem; border-radius: 6px; background: rgba(255,255,255,0.14); font-size: 0.85rem; font-weight: 700; line-height: 1.5; }
 .kiben-banner-more {
   flex: 0 0 auto;
   padding: 12px 24px;
