@@ -1,5 +1,5 @@
 # asaken(@ninjacode482651)用 毎日のサービス紹介
-# 毎日 朝6時ごろ・昼11時ごろ(日本時間)の2回、ポートフォリオのサービス紹介文を1つ選んで Discord に送る。
+# 毎日 夜18時ごろ(日本時間)に1回、ポートフォリオのサービス紹介文を1つ選んで Discord に送る。
 # Discord には「Xに投稿する」リンクも付くので、タップして投稿する(X API は有料のため使わない)。
 # GitHub の定時実行は6〜10時間遅れることがあったため使わず、Claude の定期タスクが
 # 決まった時刻にこのワークフローを起動する(slot に morning / noon を渡す)。
@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       slot:
-        description: "morning(朝)か noon(昼)"
+        description: "evening(定期タスクから起動するとき)"
         required: false
         default: ""
       check_x:

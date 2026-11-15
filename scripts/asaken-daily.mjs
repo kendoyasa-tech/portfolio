@@ -45,8 +45,8 @@ function todaysPost() {
   const jst = Date.now() + 9 * 3600e3;
   const day = Math.floor(jst / 86400e3); // 日本時間の通し日数
   // 1日2回(朝=0、昼=1)。SLOT が指定されていなければ日本時間9時より前を朝とみなす
-  const slot = process.env.SLOT === "noon" ? 1 : process.env.SLOT === "morning" ? 0 : (new Date(jst).getUTCHours() < 9 ? 0 : 1);
-  const n = day * 2 + slot; // 通し番号
+  // 1日1回(夜18時)。日本時間の日付ごとに1つ選ぶ
+  const n = day; // 通し番号
   const cycle = Math.floor(n / POSTS.length);
   return build(POSTS[shuffled(POSTS.length, cycle + 1)[n % POSTS.length]]);
 }
