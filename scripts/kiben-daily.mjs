@@ -57,6 +57,11 @@ async function post(text) {
 
 // 前の試合で大会が終わっていたら、新しい挑戦を始める
 const last = state.games[state.games.length - 1];
+// 同じ日に2回起動されても、試合は1日1回だけ
+if (!repost && !dryRun && last && last.date === jstDate() && !process.argv.includes("--force")) {
+  console.log(`今日(${jstDate()})の試合はもう終わっているので省略しました。`);
+  process.exit(0);
+}
 if (!last || !last.won || last.round === K.TOURNAMENT.length - 1) {
   state.challenge += 1;
   state.round = 0;

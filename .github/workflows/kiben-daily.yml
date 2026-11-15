@@ -1,13 +1,12 @@
 # 姫辯学園琴丘 毎朝の自動試合
 # 毎朝6時(日本時間)ごろに1試合進め、結果をDiscordの #姫辯スポーツ とXに投稿し、
 # works/kiben/data/season.json を更新してポートフォリオに反映する。
-# GitHub の定時実行は混雑で遅れることがあるため、5時45分に起動するようにしている。
+# GitHub の定時実行は3〜5時間遅れていたため使わず、Claude の定期タスクが毎朝5時54分にこのワークフローを起動する。
+# 同じ日に2回起動されても、試合は1日1回だけ(scripts/kiben-daily.mjs で判定)。
 
 name: 姫辯 毎朝の自動試合
 
 on:
-  schedule:
-    - cron: "45 20 * * *"   # UTC 20:45 = 日本時間 5:45
   workflow_dispatch:         # Actions タブから手動でも実行できる
     inputs:
       repost:
