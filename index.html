@@ -755,7 +755,7 @@
     .catch(() => {});
 </script>
 <script>
-  // 今日のおすすめ:毎日18時に X / Discord へ出している紹介文と同じものを表示する
+  // 今日のおすすめ:毎日20時に X / Discord へ出している紹介文と同じものを表示する
   // (scripts/asaken-daily.mjs と同じ選び方。文章は data/asaken-posts.json)
   fetch("data/asaken-posts.json", { cache: "no-store" })
     .then(r => r.json())
@@ -772,11 +772,11 @@
       };
       const jst = Date.now() + 9 * 3600e3;
       let day = Math.floor(jst / 86400e3);
-      if (new Date(jst).getUTCHours() < 18) day -= 1; // 毎日18時に切り替わる
+      if (new Date(jst).getUTCHours() < 20) day -= 1; // 毎日20時に切り替わる
       const n = day;
       const text = posts[shuffled(posts.length, Math.floor(n / posts.length) + 1)[n % posts.length]];
       document.getElementById("serviceTodayText").textContent = text;
-      document.getElementById("serviceTodayWhen").textContent = "(毎日18時に更新)";
+      document.getElementById("serviceTodayWhen").textContent = "(毎日20時に更新)";
       document.getElementById("serviceToday").hidden = false;
     })
     .catch(() => {});
