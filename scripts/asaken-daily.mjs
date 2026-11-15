@@ -59,9 +59,23 @@ if (process.argv.includes("--all")) {
   process.exit(0);
 }
 
+// 姫辯の今日の試合結果(毎朝 works/kiben/data/season.json に保存される)を1行添える
+function kibenLine() {
+  try {
+    const d = JSON.parse(readFileSync(new URL("../works/kiben/data/season.json", import.meta.url), "utf8"));
+    const g = (d.games || [])[d.games.length - 1];
+    const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    if (!g || g.date !== today) return "";
+    const extra = (g.innings >= 10 ? `延長${g.innings}回` : "") + (g.walkoff ? "サヨナラ" : "");
+    return `⚾今日の姫辯学園【${g.stage}】${g.won ? "○" : "●"}${g.kibenRuns}-${g.oppRuns} ${g.opponent}${extra ? `(${extra})` : ""}${g.champion ? " 🏆甲子園優勝!" : ""}`;
+  } catch {
+    return "";
+  }
+}
+const kiben = kibenLine();
 const text = todaysPost();
 // X に自動で出す文章は URL なし(URL付きは X API の料金が約13倍のため)。サイトはプロフィール欄に置く
-const xText = text.replace(`\n${SITE}`, "");
+const xText = text.replace(`\n${SITE}`, "") + (kiben ? `\n\n${kiben}` : "");
 
 // ---- X への自動投稿(ASAKEN_X_* の4つが登録されているときだけ) ----
 import { createHmac, randomBytes } from "node:crypto";
@@ -140,7 +154,7 @@ if (xReady) {
 } else {
   console.log("X用のキー(ASAKEN_X_* の4つ)が未登録のため、X への自動投稿は省略しました。");
 }
-const message = `📣 **今日のasaken投稿**\n\n${text.replace(SITE, `<${SITE}>`)}\n\n${xLine}`;
+const message = `📣 **今日のasaken投稿**\n\n${text.replace(SITE, `<${SITE}>`)}${kiben ? `\n\n${kiben}` : ""}\n\n${xLine}`;
 
 const hook = process.env.ASAKEN_DISCORD_WEBHOOK_URL;
 if (!hook) {
