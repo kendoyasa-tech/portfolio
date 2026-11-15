@@ -1040,3 +1040,9 @@ footer {
   .kiben-banner-title { font-size: 1.25rem; }
   .kiben-banner-more { width: 100%; }
 }
+
+/* 今日のおすすめ(毎日 朝・昼に自動で切り替わる) */
+.service-today { margin: 0 auto 2rem; max-width: 760px; padding: 1rem 1.25rem; border-left: 4px solid #2563eb; border-radius: 8px; background: #f3f6fd; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.service-today-label { margin: 0 0 0.4rem; font-weight: 700; font-size: 0.9rem; color: #2563eb; }
+.service-today-label span { font-weight: 400; color: #888; font-size: 0.8rem; }
+.service-today-text { margin: 0; white-space: pre-line; line-height: 1.8; }

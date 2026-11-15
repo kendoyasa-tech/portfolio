@@ -214,6 +214,10 @@
     <div class="container">
       <h2 class="section-title">SERVICE</h2>
       <p class="section-lead">それぞれ、どこまでお任せいただけるかを具体的に記載しています。ご予算やご事情にあわせて、一部だけのご依頼も承ります。</p>
+      <div class="service-today" id="serviceToday" hidden>
+        <p class="service-today-label">📣 今日のおすすめ <span id="serviceTodayWhen"></span></p>
+        <p class="service-today-text" id="serviceTodayText"></p>
+      </div>
       <div class="service-grid">
 
         <div class="service-card">
@@ -747,6 +751,35 @@
         ? `📰 ${g.date.slice(5).replace("-", "/")}の朝刊【${g.stage}】${g.headline}(${g.kibenRuns}-${g.oppRuns} ${g.opponent})`
         : "📰 明日の朝、兵庫大会1回戦から新しい夏が始まります";
       el.hidden = false;
+    })
+    .catch(() => {});
+</script>
+<script>
+  // 今日のおすすめ:毎日 朝6時・昼11時に Discord / X へ送っている紹介文と同じものを表示する
+  // (scripts/asaken-daily.mjs と同じ選び方。文章は data/asaken-posts.json)
+  fetch("data/asaken-posts.json", { cache: "no-store" })
+    .then(r => r.json())
+    .then(({ posts }) => {
+      const shuffled = (n, seed) => {
+        const order = Array.from({ length: n }, (_, i) => i);
+        let s = seed * 2654435761 % 4294967296 || 1;
+        const rand = () => (s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296;
+        for (let i = n - 1; i > 0; i--) {
+          const j = Math.floor(rand() * (i + 1));
+          [order[i], order[j]] = [order[j], order[i]];
+        }
+        return order;
+      };
+      const jst = Date.now() + 9 * 3600e3;
+      let day = Math.floor(jst / 86400e3);
+      const hour = new Date(jst).getUTCHours();
+      let slot = hour >= 11 ? 1 : 0;
+      if (hour < 6) { day -= 1; slot = 1; }
+      const n = day * 2 + slot;
+      const text = posts[shuffled(posts.length, Math.floor(n / posts.length) + 1)[n % posts.length]];
+      document.getElementById("serviceTodayText").textContent = text;
+      document.getElementById("serviceTodayWhen").textContent = slot ? "(昼の更新)" : "(朝の更新)";
+      document.getElementById("serviceToday").hidden = false;
     })
     .catch(() => {});
 </script>
